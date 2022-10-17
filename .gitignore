@@ -1,0 +1,12 @@
+.DS_Store
+*.swp
+*~.nib
+*.pbxuser
+*.perspective
+*.perspectivev3
+!.gitkeep
+.idea
+Pods/
+build/
+xcuserdata/
+xcshareddata/
