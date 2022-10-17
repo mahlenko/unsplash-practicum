@@ -6,6 +6,7 @@
 *.perspectivev3
 !.gitkeep
 .idea
+.wakatime-project
 Pods/
 build/
 xcuserdata/
