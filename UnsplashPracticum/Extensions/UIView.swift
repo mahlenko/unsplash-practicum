@@ -4,11 +4,13 @@
 //
 import UIKit
 
+// https://ibb.co/1KkJfv8
 extension UIView {
     func gradient(
-            colors: [CGColor],
-            startPoint: CGPoint = CGPoint(x: 0, y: 0),
-            endPoint: CGPoint = CGPoint(x: 0, y: 1)) {
+        colors: [CGColor],
+        startPoint: CGPoint = CGPoint(x: 0, y: 0),
+        endPoint: CGPoint = CGPoint(x: 0, y: 1)
+    ) {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.locations = [0.0, 1.0]
@@ -18,5 +20,6 @@ extension UIView {
 
         layer.backgroundColor = .none
         layer.insertSublayer(gradient, at: 0)
+        layer.setNeedsLayout()
     }
 }

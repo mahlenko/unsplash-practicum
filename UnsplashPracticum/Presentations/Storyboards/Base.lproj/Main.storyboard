@@ -33,13 +33,17 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiD-LI-Abn" userLabel="Like">
                                                     <rect key="frame" x="319" y="0.0" width="54" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="42" id="GNJ-Iv-Gn2"/>
+                                                        <constraint firstAttribute="height" constant="42" id="Xlx-HA-bxz"/>
+                                                    </constraints>
                                                     <buttonConfiguration key="configuration" style="plain" image="heart-default"/>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFc-w4-FyR" userLabel="DateRow">
-                                                    <rect key="frame" x="20" y="190" width="353" height="37"/>
+                                                    <rect key="frame" x="20" y="194" width="353" height="33"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0A-Ic-qxp" userLabel="Date">
-                                                            <rect key="frame" x="8" y="8" width="337" height="21"/>
+                                                            <rect key="frame" x="8" y="4" width="337" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" name="White"/>
                                                             <nil key="highlightedColor"/>
@@ -47,7 +51,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" name="Background"/>
                                                     <constraints>
-                                                        <constraint firstItem="Z0A-Ic-qxp" firstAttribute="top" secondItem="IFc-w4-FyR" secondAttribute="top" constant="8" id="IHD-zo-EXK"/>
+                                                        <constraint firstItem="Z0A-Ic-qxp" firstAttribute="top" secondItem="IFc-w4-FyR" secondAttribute="top" constant="4" id="IHD-zo-EXK"/>
                                                         <constraint firstAttribute="bottom" secondItem="Z0A-Ic-qxp" secondAttribute="bottom" constant="8" id="Slc-bw-ixo"/>
                                                         <constraint firstAttribute="trailing" secondItem="Z0A-Ic-qxp" secondAttribute="trailing" constant="8" id="WQT-Ew-SNY"/>
                                                         <constraint firstItem="Z0A-Ic-qxp" firstAttribute="leading" secondItem="IFc-w4-FyR" secondAttribute="leading" constant="8" id="coh-LU-S0R"/>
