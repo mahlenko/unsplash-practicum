@@ -14,8 +14,8 @@ final class ImagesListCell: UITableViewCell {
     // MARK: - IBOutlets
     static let reuseIdentifier = "ImageListCell"
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func layoutSubviews() {
+        super.layoutSubviews()
         configuration()
     }
 
@@ -23,7 +23,7 @@ final class ImagesListCell: UITableViewCell {
         super.prepareForReuse()
     }
 
-    func configuration() {
+    private func configuration() {
         backgroundColor = UIColor.clear
         selectionStyle = .none
 
@@ -36,6 +36,11 @@ final class ImagesListCell: UITableViewCell {
         dateRowView.layer.masksToBounds = imageCell.layer.masksToBounds
         dateRowView.layer.cornerRadius = imageCell.layer.cornerRadius
         dateRowView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+
+        setGradient()
+    }
+
+    private func setGradient() {
         dateRowView.gradient(
             colors: [
                 UIColor.blackBrand.withAlphaComponent(0).cgColor,

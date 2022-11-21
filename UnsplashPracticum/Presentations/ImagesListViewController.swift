@@ -25,7 +25,6 @@ class ImagesListViewController: UIViewController {
         imageFeedTable.delegate = self
         imageFeedTable.backgroundColor = .backgroundBrand
 
-        #warning("В задаче на сдачу требуется отобразить 20 изображений, хоть мок файлов 21.")
         photosName = Array(0..<20).map { "\($0)" }
     }
 
