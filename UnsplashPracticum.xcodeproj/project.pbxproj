@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B02282D2962333C00BAFEA0 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCD68BD28FDB599006D1BFC /* ImagesListViewController.swift */; };
+		8B0228302962339100BAFEA0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B02282E2962339000BAFEA0 /* ProfileViewController.swift */; };
+		8B0228312962339100BAFEA0 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B02282F2962339000BAFEA0 /* SingleImageViewController.swift */; };
 		8BCD68BA28FDB599006D1BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCD68B928FDB599006D1BFC /* AppDelegate.swift */; };
 		8BCD68BC28FDB599006D1BFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCD68BB28FDB599006D1BFC /* SceneDelegate.swift */; };
-		8BCD68BE28FDB599006D1BFC /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCD68BD28FDB599006D1BFC /* ImagesListViewController.swift */; };
 		8BCD68C128FDB599006D1BFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BCD68BF28FDB599006D1BFC /* Main.storyboard */; };
 		8BCD68C328FDB59A006D1BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCD68C228FDB59A006D1BFC /* Assets.xcassets */; };
 		8BCD68C628FDB59A006D1BFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BCD68C428FDB59A006D1BFC /* LaunchScreen.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B02282E2962339000BAFEA0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8B02282F2962339000BAFEA0 /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		8BCD68B628FDB599006D1BFC /* UnsplashPracticum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashPracticum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCD68B928FDB599006D1BFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BCD68BB28FDB599006D1BFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 			children = (
 				8B8DE9A128FDB7F10017E31B /* Storyboards */,
 				8BCD68BD28FDB599006D1BFC /* ImagesListViewController.swift */,
+				8B02282E2962339000BAFEA0 /* ProfileViewController.swift */,
+				8B02282F2962339000BAFEA0 /* SingleImageViewController.swift */,
 				FB30EFB28DE9DC441F8CA8B0 /* Components */,
 			);
 			path = Presentations;
@@ -95,16 +101,8 @@
 				8BCD68B928FDB599006D1BFC /* AppDelegate.swift */,
 				8BCD68BB28FDB599006D1BFC /* SceneDelegate.swift */,
 				FB30E7D2417B7937FE827491 /* Extensions */,
-				FB30E69D4495FBF4D95FEEA1 /* Helpers */,
 			);
 			path = UnsplashPracticum;
-			sourceTree = "<group>";
-		};
-		FB30E69D4495FBF4D95FEEA1 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		FB30E7D2417B7937FE827491 /* Extensions */ = {
@@ -197,11 +195,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BCD68BE28FDB599006D1BFC /* ImagesListViewController.swift in Sources */,
+				8B02282D2962333C00BAFEA0 /* ImagesListViewController.swift in Sources */,
 				8BCD68BA28FDB599006D1BFC /* AppDelegate.swift in Sources */,
 				8BCD68BC28FDB599006D1BFC /* SceneDelegate.swift in Sources */,
 				FB30E2ECD3139CE7601FDC3E /* ImagesListCell.swift in Sources */,
+				8B0228302962339100BAFEA0 /* ProfileViewController.swift in Sources */,
 				FB30E1A6DE3B8864F36D8EF8 /* UIColor.swift in Sources */,
+				8B0228312962339100BAFEA0 /* SingleImageViewController.swift in Sources */,
 				FB30E638483C0E53AAD0F514 /* UIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,9 +278,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = (
-					"\"Portrait (bottom home button)\"",
-				);
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "\"Portrait (bottom home button)\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -335,9 +333,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = (
-					"\"Portrait (bottom home button)\"",
-				);
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "\"Portrait (bottom home button)\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
