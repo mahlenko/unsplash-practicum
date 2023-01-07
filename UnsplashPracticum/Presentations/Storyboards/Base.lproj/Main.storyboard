@@ -7,6 +7,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -130,19 +131,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" contentInsetAdjustmentBehavior="scrollableAxes" translatesAutoresizingMaskIntoConstraints="NO" id="E8l-T6-y8d">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentInsetAdjustmentBehavior="scrollableAxes" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="E8l-T6-y8d">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="imageZoom" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="ea9-nb-jqL">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="imageZoom" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="ea9-nb-jqL">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="132"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <gestureRecognizers/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="uq9-3q-36U" firstAttribute="trailing" secondItem="ea9-nb-jqL" secondAttribute="trailing" id="8no-a0-QL7"/>
-                                    <constraint firstItem="ea9-nb-jqL" firstAttribute="top" secondItem="uq9-3q-36U" secondAttribute="top" id="Hd8-2J-lLa"/>
-                                    <constraint firstItem="ea9-nb-jqL" firstAttribute="leading" secondItem="uq9-3q-36U" secondAttribute="leading" id="Ns1-pI-NPN"/>
-                                    <constraint firstItem="uq9-3q-36U" firstAttribute="bottom" secondItem="ea9-nb-jqL" secondAttribute="bottom" id="lLe-3P-3O4"/>
+                                    <constraint firstAttribute="trailing" secondItem="ea9-nb-jqL" secondAttribute="trailing" id="K6W-NZ-htF"/>
+                                    <constraint firstItem="ea9-nb-jqL" firstAttribute="leading" secondItem="E8l-T6-y8d" secondAttribute="leading" id="L2A-qa-teM"/>
+                                    <constraint firstAttribute="bottom" secondItem="ea9-nb-jqL" secondAttribute="bottom" id="TGA-JU-thk"/>
+                                    <constraint firstItem="ea9-nb-jqL" firstAttribute="top" secondItem="E8l-T6-y8d" secondAttribute="top" id="bpK-mA-lg1"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="uq9-3q-36U"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="1CH-pq-73Y"/>
@@ -171,9 +173,9 @@
                             <constraint firstAttribute="bottom" secondItem="E8l-T6-y8d" secondAttribute="bottom" id="8pu-f9-dq9"/>
                             <constraint firstItem="mXB-8i-6SY" firstAttribute="leading" secondItem="3qb-eh-hpd" secondAttribute="leading" constant="8" id="BeN-Sr-afw"/>
                             <constraint firstItem="E8l-T6-y8d" firstAttribute="top" secondItem="f62-oG-GdD" secondAttribute="top" id="Igj-sl-wr3"/>
+                            <constraint firstItem="3qb-eh-hpd" firstAttribute="trailing" secondItem="E8l-T6-y8d" secondAttribute="trailing" id="PfJ-LI-bCy"/>
+                            <constraint firstItem="3qb-eh-hpd" firstAttribute="leading" secondItem="E8l-T6-y8d" secondAttribute="leading" id="XP0-aa-fHz"/>
                             <constraint firstItem="mXB-8i-6SY" firstAttribute="top" secondItem="3qb-eh-hpd" secondAttribute="top" constant="8" id="oz6-4V-UEd"/>
-                            <constraint firstItem="E8l-T6-y8d" firstAttribute="leading" secondItem="f62-oG-GdD" secondAttribute="leading" id="tVU-qW-8AT"/>
-                            <constraint firstItem="E8l-T6-y8d" firstAttribute="trailing" secondItem="f62-oG-GdD" secondAttribute="trailing" id="uQx-ZT-uew"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5w7-KO-1KX"/>
@@ -276,5 +278,8 @@
         <namedColor name="White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
