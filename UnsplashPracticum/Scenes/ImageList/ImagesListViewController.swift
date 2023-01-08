@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - ViewController
 
-class ImagesListViewController: UIViewController {
-    @IBOutlet private var imageFeedTable: UITableView!
+final class ImagesListViewController: UIViewController {
+    @IBOutlet private weak var imageFeedTable: UITableView!
 
     private let showSingleImageSegueId = "ShowSingleImage"
 

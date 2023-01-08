@@ -8,9 +8,9 @@ import UIKit
 class SingleImageViewController: UIViewController {
     // MARK: - Outlets
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var sharingButton: UIButton!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var sharingButton: UIButton!
 
     // MARK: -
     var image: UIImage! {
@@ -72,7 +72,7 @@ class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func didTapShareButton(_ sender: Any) {
+    @IBAction private func didTapShareButton(_ sender: Any) {
         guard let image else { return }
         let imageToShared = [image as UIImage] as [Any]
 
