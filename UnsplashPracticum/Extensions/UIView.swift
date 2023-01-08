@@ -12,11 +12,8 @@ extension UIView {
         name: String = "default"
     ) {
         if let sublayers = layer.sublayers {
-            sublayers.forEach { layer in
-                // удаляем градиент если уже добавляли его
-                if layer is CAGradientLayer && layer.name == name {
-                    layer.removeFromSuperlayer()
-                }
+            if sublayers.contains(where: { $0 is CAGradientLayer && $0.name == name }) {
+                return
             }
         }
 

@@ -9,12 +9,10 @@ import UIKit
 
 // MARK: - ViewController
 
-class ImagesListViewController: UIViewController {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
+final class ImagesListViewController: UIViewController {
+    @IBOutlet private weak var imageFeedTable: UITableView!
 
-    @IBOutlet private var imageFeedTable: UITableView!
+    private let showSingleImageSegueId = "ShowSingleImage"
 
     private var photosName: [String] = []
 
@@ -28,6 +26,18 @@ class ImagesListViewController: UIViewController {
         photosName = Array(0..<20).map { "\($0)" }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case showSingleImageSegueId:
+            let viewController = segue.destination as! SingleImageViewController
+            let indexPath = sender as! IndexPath
+            let image = UIImage(named: photosName[indexPath.row])
+            viewController.image = image
+        default:
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -38,6 +48,7 @@ class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: showSingleImageSegueId, sender: indexPath)
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -77,6 +88,7 @@ extension ImagesListViewController {
         cell.imageCell.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
 
+        // mock liked button
         if (indexPath.row % 2) != 0 {
             like(cell.likeButton)
         } else {
