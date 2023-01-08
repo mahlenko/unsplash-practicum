@@ -11,14 +11,15 @@ extension UIView {
         endPoint: CGPoint = CGPoint(x: 0, y: 1),
         name: String = "default"
     ) {
+        var hasGradient = false
+
         if let sublayers = layer.sublayers {
             sublayers.forEach { layer in
-                // удаляем градиент если уже добавляли его
-                if layer is CAGradientLayer && layer.name == name {
-                    layer.removeFromSuperlayer()
-                }
+                if layer is CAGradientLayer && layer.name == name { hasGradient = true }
             }
         }
+
+        if hasGradient { return }
 
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
