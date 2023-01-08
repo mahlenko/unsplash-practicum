@@ -18,7 +18,7 @@ class SingleImageViewController: UIViewController {
             guard isViewLoaded else { return }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,8 +60,8 @@ class SingleImageViewController: UIViewController {
             top: Double((contentSize.height - viewSize.height) / 2))
 
         scrollView.setContentOffset(
-                CGPoint(x: offset.left, y: offset.top),
-                animated: false)
+            CGPoint(x: offset.left, y: offset.top),
+            animated: false)
 
         print("Offsets: \(offset)")
     }
@@ -77,8 +77,8 @@ class SingleImageViewController: UIViewController {
         let imageToShared = [image as UIImage] as [Any]
 
         let activityViewController = UIActivityViewController(
-                activityItems: imageToShared,
-                applicationActivities: nil)
+            activityItems: imageToShared,
+            applicationActivities: nil)
 
         present(activityViewController, animated: true)
     }
