@@ -33,10 +33,8 @@ class ImagesListViewController: UIViewController {
             let indexPath = sender as! IndexPath
             let image = UIImage(named: photosName[indexPath.row])
             viewController.image = image
-            break
         default:
             super.prepare(for: segue, sender: sender)
-            break
         }
     }
 
