@@ -13,11 +13,13 @@
 		FB30E1A6DE3B8864F36D8EF8 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E9F350604B462EE76A5C /* UIColor.swift */; };
 		FB30E2E4D4F424291C578BED /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E871A42D905E51A81831 /* ImagesListViewController.swift */; };
 		FB30E390E33CA6BE946810F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB30EA2592EF634A55DD4AE2 /* Main.storyboard */; };
+		FB30E4FE9A53AFD50CB6ABD2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E29CD5466C25C9E64619 /* Constant.swift */; };
 		FB30E638483C0E53AAD0F514 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E86820866119BA2AEA47 /* UIView.swift */; };
 		FB30E81510F258E754D78F50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA823E4130B726CA4AE0 /* ProfileViewController.swift */; };
 		FB30E949243B79970472C55B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB30E64944ED3490BCD4BFA0 /* LaunchScreen.storyboard */; };
 		FB30EC866FD14AF79626B0A7 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E372D54D03BC8C74EFD7 /* SingleImageViewController.swift */; };
 		FB30ECA48853341513752C4E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E30AE730560D49931B8B /* ImagesListCell.swift */; };
+		FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,7 @@
 		8BCD68BB28FDB599006D1BFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8BCD68C228FDB59A006D1BFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BCD68C728FDB59A006D1BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB30E29CD5466C25C9E64619 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		FB30E30AE730560D49931B8B /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		FB30E372D54D03BC8C74EFD7 /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		FB30E64944ED3490BCD4BFA0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -33,6 +36,7 @@
 		FB30E871A42D905E51A81831 /* ImagesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
 		FB30E9F350604B462EE76A5C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		FB30EA2592EF634A55DD4AE2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		FB30EA823E4130B726CA4AE0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +56,7 @@
 			children = (
 				8BCD68C228FDB59A006D1BFC /* Assets.xcassets */,
 				8BCD68C728FDB59A006D1BFC /* Info.plist */,
+				FB30E29CD5466C25C9E64619 /* Constant.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -79,12 +84,12 @@
 				8BCD68B928FDB599006D1BFC /* AppDelegate.swift */,
 				8BCD68BB28FDB599006D1BFC /* SceneDelegate.swift */,
 				FB30E7D2417B7937FE827491 /* Extensions */,
-				FB30E4BDA57520987BBAF24E /* Screens */,
+				FB30E4BDA57520987BBAF24E /* Scenes */,
 			);
 			path = UnsplashPracticum;
 			sourceTree = "<group>";
 		};
-		FB30E4BDA57520987BBAF24E /* Screens */ = {
+		FB30E4BDA57520987BBAF24E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				FB30E929F83DDC023903942A /* SingleImageView */,
@@ -92,8 +97,9 @@
 				FB30EEFAAFF690ED46753DA6 /* Profile */,
 				FB30E64944ED3490BCD4BFA0 /* LaunchScreen.storyboard */,
 				FB30EA2592EF634A55DD4AE2 /* Main.storyboard */,
+				FB30E9F4FB0E82BD73D1B5C7 /* Auth */,
 			);
-			path = Screens;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		FB30E7D2417B7937FE827491 /* Extensions */ = {
@@ -111,6 +117,14 @@
 				FB30E372D54D03BC8C74EFD7 /* SingleImageViewController.swift */,
 			);
 			path = SingleImageView;
+			sourceTree = "<group>";
+		};
+		FB30E9F4FB0E82BD73D1B5C7 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		FB30EB0BC7A1BDCBA194CA73 /* ImageList */ = {
@@ -211,6 +225,8 @@
 				FB30ECA48853341513752C4E /* ImagesListCell.swift in Sources */,
 				FB30E2E4D4F424291C578BED /* ImagesListViewController.swift in Sources */,
 				FB30E81510F258E754D78F50 /* ProfileViewController.swift in Sources */,
+				FB30E4FE9A53AFD50CB6ABD2 /* Constant.swift in Sources */,
+				FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
