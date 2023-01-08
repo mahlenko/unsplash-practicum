@@ -5,12 +5,12 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     // MARK: - Outlets
-    @IBOutlet weak var avatar: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var nicknameLabel: UILabel!
-    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet private weak var avatar: UIImageView!
+    @IBOutlet private weak var usernameLabel: UILabel!
+    @IBOutlet private weak var nicknameLabel: UILabel!
+    @IBOutlet private weak var logoutButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()

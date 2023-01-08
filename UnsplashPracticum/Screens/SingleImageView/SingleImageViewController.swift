@@ -5,12 +5,12 @@
 
 import UIKit
 
-class SingleImageViewController: UIViewController {
+final class SingleImageViewController: UIViewController {
     // MARK: - Outlets
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var sharingButton: UIButton!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var sharingButton: UIButton!
 
     // MARK: -
     var image: UIImage! {
@@ -18,7 +18,7 @@ class SingleImageViewController: UIViewController {
             guard isViewLoaded else { return }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,8 +60,8 @@ class SingleImageViewController: UIViewController {
             top: Double((contentSize.height - viewSize.height) / 2))
 
         scrollView.setContentOffset(
-                CGPoint(x: offset.left, y: offset.top),
-                animated: false)
+            CGPoint(x: offset.left, y: offset.top),
+            animated: false)
 
         print("Offsets: \(offset)")
     }
@@ -72,13 +72,13 @@ class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func didTapShareButton(_ sender: Any) {
+    @IBAction private func didTapShareButton(_ sender: Any) {
         guard let image else { return }
         let imageToShared = [image as UIImage] as [Any]
 
         let activityViewController = UIActivityViewController(
-                activityItems: imageToShared,
-                applicationActivities: nil)
+            activityItems: imageToShared,
+            applicationActivities: nil)
 
         present(activityViewController, animated: true)
     }

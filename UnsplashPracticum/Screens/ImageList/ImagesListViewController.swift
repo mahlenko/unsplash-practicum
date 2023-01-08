@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - ViewController
 
-class ImagesListViewController: UIViewController {
-    @IBOutlet private var imageFeedTable: UITableView!
+final class ImagesListViewController: UIViewController {
+    @IBOutlet private weak var imageFeedTable: UITableView!
 
     private let showSingleImageSegueId = "ShowSingleImage"
 
@@ -33,10 +33,8 @@ class ImagesListViewController: UIViewController {
             let indexPath = sender as! IndexPath
             let image = UIImage(named: photosName[indexPath.row])
             viewController.image = image
-            break
         default:
             super.prepare(for: segue, sender: sender)
-            break
         }
     }
 

@@ -11,15 +11,11 @@ extension UIView {
         endPoint: CGPoint = CGPoint(x: 0, y: 1),
         name: String = "default"
     ) {
-        var hasGradient = false
-
         if let sublayers = layer.sublayers {
-            sublayers.forEach { layer in
-                if layer is CAGradientLayer && layer.name == name { hasGradient = true }
+            if sublayers.contains(where: { $0 is CAGradientLayer && $0.name == name }) {
+                return
             }
         }
-
-        if hasGradient { return }
 
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
