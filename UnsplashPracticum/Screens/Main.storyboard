@@ -165,6 +165,18 @@
                                     <action selector="didTapBackButton" destination="h26-1K-hAK" eventType="touchUpInside" id="GEy-NV-81n"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blc-By-gzb" userLabel="sharing">
+                                <rect key="frame" x="182" y="761" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GWq-pk-6Lm"/>
+                                    <constraint firstAttribute="width" constant="50" id="wko-K7-xn7"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="sharing"/>
+                                <connections>
+                                    <action selector="didTapShareButton:" destination="h26-1K-hAK" eventType="touchUpInside" id="3aE-B9-v4Y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3qb-eh-hpd"/>
                         <color key="backgroundColor" name="Black"/>
@@ -175,13 +187,16 @@
                             <constraint firstItem="E8l-T6-y8d" firstAttribute="top" secondItem="f62-oG-GdD" secondAttribute="top" id="Igj-sl-wr3"/>
                             <constraint firstItem="3qb-eh-hpd" firstAttribute="trailing" secondItem="E8l-T6-y8d" secondAttribute="trailing" id="PfJ-LI-bCy"/>
                             <constraint firstItem="3qb-eh-hpd" firstAttribute="leading" secondItem="E8l-T6-y8d" secondAttribute="leading" id="XP0-aa-fHz"/>
+                            <constraint firstItem="blc-By-gzb" firstAttribute="centerX" secondItem="3qb-eh-hpd" secondAttribute="centerX" id="b1R-EP-FTb"/>
                             <constraint firstItem="mXB-8i-6SY" firstAttribute="top" secondItem="3qb-eh-hpd" secondAttribute="top" constant="8" id="oz6-4V-UEd"/>
+                            <constraint firstItem="3qb-eh-hpd" firstAttribute="bottom" secondItem="blc-By-gzb" secondAttribute="bottom" constant="51" id="wmf-oJ-1q7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5w7-KO-1KX"/>
                     <connections>
                         <outlet property="imageView" destination="ea9-nb-jqL" id="ER3-6R-Hof"/>
                         <outlet property="scrollView" destination="E8l-T6-y8d" id="AhS-mb-jp1"/>
+                        <outlet property="sharingButton" destination="blc-By-gzb" id="ft8-ux-6eg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYd-qm-LeJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -199,7 +214,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KFy-Ie-eR6">
                                 <rect key="frame" x="16" y="76" width="382" height="70"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person-default" translatesAutoresizingMaskIntoConstraints="NO" id="snW-R2-HzZ" userLabel="avatar">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="snW-R2-HzZ" userLabel="avatar">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <color key="backgroundColor" name="White"/>
                                         <constraints>
@@ -218,16 +233,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Махленко Сергей" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q05-Mo-biY" userLabel="username">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q05-Mo-biY" userLabel="username">
                                 <rect key="frame" x="16" y="154" width="382" height="27.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <color key="textColor" name="White"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@mahlenko" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="923-0a-BNY" userLabel="nickname">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="923-0a-BNY" userLabel="nickname">
                                 <rect key="frame" x="16" y="189.5" width="372" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" name="Gray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello word!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIl-gg-Qbi" userLabel="placeholder text">
+                                <rect key="frame" x="16" y="213.5" width="372" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="White"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -235,8 +256,11 @@
                         <color key="backgroundColor" name="Black"/>
                         <constraints>
                             <constraint firstItem="Q05-Mo-biY" firstAttribute="leading" secondItem="Etg-ST-hjt" secondAttribute="leading" constant="16" id="AIP-HV-KsJ"/>
+                            <constraint firstItem="oIl-gg-Qbi" firstAttribute="leading" secondItem="Etg-ST-hjt" secondAttribute="leading" constant="16" id="CXi-pV-E1p"/>
+                            <constraint firstItem="oIl-gg-Qbi" firstAttribute="top" secondItem="923-0a-BNY" secondAttribute="bottom" constant="8" id="F16-cf-yFT"/>
                             <constraint firstItem="KFy-Ie-eR6" firstAttribute="top" secondItem="3e3-8z-dsF" secondAttribute="top" constant="76" id="JBD-6s-qOo"/>
                             <constraint firstItem="Etg-ST-hjt" firstAttribute="trailing" secondItem="Q05-Mo-biY" secondAttribute="trailing" constant="16" id="LJh-cA-acQ"/>
+                            <constraint firstItem="Etg-ST-hjt" firstAttribute="trailing" secondItem="oIl-gg-Qbi" secondAttribute="trailing" constant="26" id="O6z-Km-sVT"/>
                             <constraint firstItem="Q05-Mo-biY" firstAttribute="top" secondItem="KFy-Ie-eR6" secondAttribute="bottom" constant="8" id="cP4-yW-g8T"/>
                             <constraint firstItem="Etg-ST-hjt" firstAttribute="trailing" secondItem="923-0a-BNY" secondAttribute="trailing" constant="26" id="ggJ-14-AIb"/>
                             <constraint firstItem="923-0a-BNY" firstAttribute="top" secondItem="Q05-Mo-biY" secondAttribute="bottom" constant="8" id="iaG-5n-x3N"/>
@@ -255,17 +279,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6FM-jK-8sD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7" y="302"/>
+            <point key="canvasLocation" x="-7.2463768115942031" y="301.33928571428572"/>
         </scene>
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="avatar" width="70" height="70"/>
         <image name="chevrone-backward" width="9" height="16"/>
         <image name="collection-bar" width="20" height="22"/>
         <image name="heart-default" width="42" height="42"/>
         <image name="logout-active" width="20" height="22"/>
-        <image name="person-default" width="70" height="70"/>
         <image name="profile-bar" width="24" height="24"/>
+        <image name="sharing" width="50" height="50"/>
         <namedColor name="Background">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
