@@ -6,31 +6,45 @@
 import UIKit
 
 class SingleImageViewController: UIViewController {
+    // MARK: - Outlets
+
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var sharingButton: UIButton!
 
-    let maxScale = 1.25
-
+    // MARK: -
     var image: UIImage! {
         didSet {
             guard isViewLoaded else { return }
         }
     }
-
-    @IBAction private func didTapBackButton() {
-        dismiss(animated: true, completion: nil)
-    }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.image = image
 
         scrollView.minimumZoomScale = 0.1
-        scrollView.maximumZoomScale = maxScale
+        scrollView.maximumZoomScale = 1.25
+
+        imageView.image = image
 
         // размеры и позиционирование изображения
         scrollView.setZoomScale(getScaleImage(), animated: false)
         centeredImage()
+    }
+
+    private func getScaleImage() -> CGFloat {
+        let minScale = scrollView.minimumZoomScale
+        let maxScale = scrollView.maximumZoomScale
+
+        let imageSize = image.size
+        let viewSize = scrollView.bounds.size
+
+        let wScale = viewSize.height / imageSize.height
+        let hScale = viewSize.width / imageSize.width
+
+        let theoreticalScale = max(hScale, wScale)
+
+        return min(maxScale, max(minScale, theoreticalScale))
     }
 
     private func centeredImage() {
@@ -46,28 +60,27 @@ class SingleImageViewController: UIViewController {
             top: Double((contentSize.height - viewSize.height) / 2))
 
         scrollView.setContentOffset(
-                CGPoint(
-                    x: offset.left,
-                    y: offset.top),
+                CGPoint(x: offset.left, y: offset.top),
                 animated: false)
 
         print("Offsets: \(offset)")
     }
 
-    /// Вернет масштаб изображения
-    private func getScaleImage() -> CGFloat {
-        let minScale = scrollView.minimumZoomScale
-        let maxScale = scrollView.maximumZoomScale
+    // MARK: - Actions
 
-        let imageSize = image.size
-        let viewSize = scrollView.bounds.size
+    @IBAction private func didTapBackButton() {
+        dismiss(animated: true, completion: nil)
+    }
 
-        let wScale = viewSize.height / imageSize.height
-        let hScale = viewSize.width / imageSize.width
+    @IBAction func didTapShareButton(_ sender: Any) {
+        guard let image else { return }
+        let imageToShared = [image as UIImage] as [Any]
 
-        let theoreticalScale = max(hScale, wScale)
+        let activityViewController = UIActivityViewController(
+                activityItems: imageToShared,
+                applicationActivities: nil)
 
-        return min(maxScale, max(minScale, theoreticalScale))
+        present(activityViewController, animated: true)
     }
 }
 

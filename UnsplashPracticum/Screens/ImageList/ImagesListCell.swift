@@ -1,6 +1,8 @@
 //
-// Created by Сергей Махленко on 09.11.2022.
-// Copyright (c) 2022 ru.app-demo.unsplash. All rights reserved.
+//  ImagesListViewCell.swift
+//  UnsplashPracticum
+//
+//  Created by Сергей Махленко on 09.11.2022.
 //
 
 import UIKit

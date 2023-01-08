@@ -90,6 +90,7 @@ extension ImagesListViewController {
         cell.imageCell.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
 
+        // mock liked button
         if (indexPath.row % 2) != 0 {
             like(cell.likeButton)
         } else {
