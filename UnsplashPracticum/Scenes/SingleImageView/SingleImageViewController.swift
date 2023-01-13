@@ -5,7 +5,7 @@
 
 import UIKit
 
-class SingleImageViewController: UIViewController {
+final class SingleImageViewController: UIViewController {
     // MARK: - Outlets
 
     @IBOutlet private weak var imageView: UIImageView!
