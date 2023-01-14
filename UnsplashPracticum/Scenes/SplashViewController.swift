@@ -5,6 +5,7 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -70,6 +71,7 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
+        ProgressHUD.show()
         dismiss(animated: true) {
             self.getTokenAuthorize(code: code)
         }
@@ -85,7 +87,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                     guard let self else { return }
                     self.tokenStorage.userToken = token
                     self.switchToTabBarController()
-                case .failure(_):
+                    ProgressHUD.dismiss()
+                case .failure:
                     break
                 }
             }
