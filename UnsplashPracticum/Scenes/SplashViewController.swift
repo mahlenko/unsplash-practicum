@@ -5,7 +5,6 @@
 
 import Foundation
 import UIKit
-import ProgressHUD
 
 class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -16,7 +15,7 @@ class SplashViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let token = tokenStorage.userToken {
+        if (tokenStorage.userToken) != nil {
             switchToTabBarController()
         } else {
             showScreenLogin()
@@ -43,22 +42,6 @@ extension SplashViewController {
         performSegue(withIdentifier: "ShowAuthenticationScreen", sender: self)
     }
 
-//    private func showScreenApp(token: String) {
-//        GetProfile(urlSession: session).fetchUserProfile(token: token) { [weak self] result in
-//            switch result {
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            case .success(let profile):
-//                // show profile screen
-//                print(profile)
-//                guard let self else { return }
-//                DispatchQueue.main.async {
-//                    self.switchToTabBarController()
-//                }
-//            }
-//        }
-//    }
-
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
 
@@ -71,7 +54,7 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
-        ProgressHUD.show()
+        UIBlockingProgressHUD.show()
         dismiss(animated: true) {
             self.getTokenAuthorize(code: code)
         }
@@ -87,7 +70,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                     guard let self else { return }
                     self.tokenStorage.userToken = token
                     self.switchToTabBarController()
-                    ProgressHUD.dismiss()
+                    UIBlockingProgressHUD.dismiss()
                 case .failure:
                     break
                 }
