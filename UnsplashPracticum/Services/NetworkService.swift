@@ -5,7 +5,7 @@
 
 import Foundation
 
-enum FetchMethod {
+enum FetchMethod: String {
     case GET
     case POST
 }
@@ -17,7 +17,7 @@ class NetworkService {
         public var errorDescription: String? {
             switch self {
             case .unsplashErrorCode:
-                // todo: попробовать сделать локализацию ошибок, когда нибудь :D
+                // TODO: попробовать сделать локализацию ошибок, когда нибудь :D
                 return "Unsplash API returned an error code."
             }
         }
@@ -33,7 +33,7 @@ class NetworkService {
         guard let url = urlComponent.url else { fatalError("Oops, something went wrong.")}
 
         var request = URLRequest(url: url)
-        request.httpMethod = "\(method)"
+        request.httpMethod = method.rawValue
 
         if method != .GET, let query = urlComponent.query {
             request.httpBody = Data(query.utf8)

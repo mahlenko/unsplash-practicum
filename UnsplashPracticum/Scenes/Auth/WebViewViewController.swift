@@ -97,7 +97,7 @@ extension WebViewViewController: WKNavigationDelegate {
     }
 
     private func updateProgress() {
-        progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+        progressView.setProgress(Float(webView.estimatedProgress), animated: false)
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
 }

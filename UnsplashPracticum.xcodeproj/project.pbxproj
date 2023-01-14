@@ -29,7 +29,6 @@
 		FB30ECC6203C570472BFB5B2 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E7AB6927B011E231E09B /* OAuth2Service.swift */; };
 		FB30ECD2D0B1B918A6F9EF76 /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30ECED0743F8FD7D275920 /* OAuth2Token.swift */; };
 		FB30ED2D8D593B61C496BD73 /* AuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E487133F03C58916152F /* AuthViewControllerDelegate.swift */; };
-		FB30EDB0A0B9B5623C8D943E /* OAuth2TokenStorageKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E5F29C6E581127149DF5 /* OAuth2TokenStorageKeychain.swift */; };
 		FB30EDCF3E42B8DFAB76D44C /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EB5A72F822A9A2E215D5 /* ProfileImageModel.swift */; };
 		FB30EE1824AFDBB840A9FF37 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EF0F26F9CA23B46B54E5 /* ProfileModel.swift */; };
 		FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */; };
@@ -47,7 +46,6 @@
 		FB30E372D54D03BC8C74EFD7 /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		FB30E487133F03C58916152F /* AuthViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewControllerDelegate.swift; sourceTree = "<group>"; };
 		FB30E599E531E75F163F1D1B /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		FB30E5F29C6E581127149DF5 /* OAuth2TokenStorageKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageKeychain.swift; sourceTree = "<group>"; };
 		FB30E64944ED3490BCD4BFA0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB30E7AB6927B011E231E09B /* OAuth2Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		FB30E86820866119BA2AEA47 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 			children = (
 				FB30EB6B7A3394650EBE299F /* OAuth2TokenStorageUserDefault.swift */,
 				FB30ECED0743F8FD7D275920 /* OAuth2Token.swift */,
-				FB30E5F29C6E581127149DF5 /* OAuth2TokenStorageKeychain.swift */,
 			);
 			path = TokenStorage;
 			sourceTree = "<group>";
@@ -321,7 +318,6 @@
 				FB30E6EDFD90B12423D4751D /* NetworkService.swift in Sources */,
 				FB30E9BDD2CA210FEFEC679E /* OAuth2TokenStorageUserDefault.swift in Sources */,
 				FB30ECD2D0B1B918A6F9EF76 /* OAuth2Token.swift in Sources */,
-				FB30EDB0A0B9B5623C8D943E /* OAuth2TokenStorageKeychain.swift in Sources */,
 				FB30E3C696441957FF59A9C8 /* SplashViewController.swift in Sources */,
 				FB30EBB2EE4E9C6BF729A3B0 /* GetProfile.swift in Sources */,
 				FB30EDCF3E42B8DFAB76D44C /* ProfileImageModel.swift in Sources */,

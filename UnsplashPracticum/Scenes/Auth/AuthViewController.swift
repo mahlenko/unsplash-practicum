@@ -6,26 +6,7 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
-//    var tokenStorage: OAuth2Token
-
-    //var delegate: WebViewViewControllerDelegate?
-    var delegate: AuthViewControllerDelegate?
-
-//    init(storage: OAuth2Token) {
-//        tokenStorage = storage
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        if let token = tokenStorage.userToken {
-//            print("User token: \(token)")
-//        }
-//    }
+    weak var delegate: AuthViewControllerDelegate?
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
