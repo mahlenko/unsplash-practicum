@@ -11,6 +11,9 @@ enum FetchMethod: String {
 }
 
 class NetworkService {
+    var lastUrlComponent: URLComponents?
+    var task: URLSessionTask?
+
     private enum NetworkError: LocalizedError {
         case unsplashErrorCode
 
@@ -32,6 +35,12 @@ class NetworkService {
     func fetch(method: FetchMethod, urlComponent: URLComponents, headers: [(key: String, value: String)] = [], completion: @escaping (Result<Data, Error>) -> Void) {
         guard let url = urlComponent.url else { fatalError("Oops, something went wrong.")}
 
+        //
+        assert(Thread.isMainThread)
+        guard urlComponent != lastUrlComponent else { return }
+        task?.cancel()
+        lastUrlComponent = urlComponent
+
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
@@ -45,7 +54,10 @@ class NetworkService {
             }
         }
 
-        urlSession.dataTask(with: request) { data, response, error in
+        let task = urlSession.dataTask(with: request) { data, response, error in
+            self.lastUrlComponent = nil
+            self.task = nil
+
             if let error = error { completion(.failure(error)) }
 
             if let response = response as? HTTPURLResponse,
@@ -57,6 +69,8 @@ class NetworkService {
             guard let data = data else { return }
             completion(.success(data))
         }
-        .resume()
+
+        self.task = task
+        task.resume()
     }
 }
