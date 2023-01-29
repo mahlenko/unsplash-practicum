@@ -8,6 +8,8 @@ import UIKit
 final class AuthViewController: UIViewController {
     weak var delegate: AuthViewControllerDelegate?
 
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "webViewSegue":

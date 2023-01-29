@@ -18,6 +18,8 @@ class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        configureScreen()
+
         if let token = tokenStorage.userToken {
             fetchProfile(token: token)
         } else {
@@ -27,22 +29,15 @@ class SplashViewController: UIViewController {
 }
 
 extension SplashViewController {
-    open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case authScreenSegueIdentifier:
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(authScreenSegueIdentifier)") }
-
-            viewController.delegate = self
-        default:
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-
     private func showScreenLogin() {
-        performSegue(withIdentifier: "ShowAuthenticationScreen", sender: self)
+        guard let authController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController
+        else { return }
+
+        authController.modalPresentationStyle = .fullScreen
+        authController.delegate = self
+
+        present(authController, animated: true)
     }
 }
 

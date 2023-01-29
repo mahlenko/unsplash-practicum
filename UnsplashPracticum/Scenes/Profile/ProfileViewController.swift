@@ -8,6 +8,8 @@ import Drops
 import Kingfisher
 
 final class ProfileViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+
     // MARK: - UI elements
     internal var avatarImageView = UIImageView()
     internal var usernameLabel = UILabel()
@@ -21,7 +23,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureUI()
+        configureScreen()
 
         guard let profile = profileRequest.profile else { return }
         updateProfileDetails(profile: profile)

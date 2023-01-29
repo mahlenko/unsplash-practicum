@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 extension ProfileViewController {
-    func configureUI() {
+    func configureScreen() {
         view.backgroundColor = UIColor.backgroundBrand
 
         configureAvatarImageView()

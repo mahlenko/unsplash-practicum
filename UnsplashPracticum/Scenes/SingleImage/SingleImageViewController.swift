@@ -6,6 +6,8 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+
     // MARK: - Outlets
 
     @IBOutlet private weak var imageView: UIImageView!
