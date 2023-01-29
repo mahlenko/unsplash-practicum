@@ -4,17 +4,42 @@
 //
 
 import UIKit
+import Drops
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet private weak var avatar: UIImageView!
     @IBOutlet private weak var usernameLabel: UILabel!
     @IBOutlet private weak var nicknameLabel: UILabel!
+    @IBOutlet private weak var biographyLabel: UILabel!
     @IBOutlet private weak var logoutButton: UIButton!
+
+    private let profileRequest = ProfileRequest.shared
+    private let userProfileRequest = UserProfileRequest.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let profile = profileRequest.profile else { return }
+        updateProfileDetails(profile: profile)
+
+        if let userPictureURL = userProfileRequest.profile?.pictureURL {
+            updateUserAvatar(url: userPictureURL)
+        }
     }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        addObserver()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addObserver()
+    }
+
+    deinit { removeObserver() }
 
     @IBAction func tapLogoutButton(_ sender: Any) {
         // нужно использовать делегат и доступ к OAuth2Token.
@@ -23,7 +48,7 @@ final class ProfileViewController: UIViewController {
         let message = "Действительно хотите выйти?"
         let alertView = UIAlertController(title: "Пока, пока!", message: message, preferredStyle: .alert)
         let buttonNo = UIAlertAction(title: "Нет", style: .cancel)
-        let buttonYes = UIAlertAction(title: "Да", style: .default) { [weak self] action in
+        let buttonYes = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self else { return }
             self.userLogout()
         }
@@ -43,5 +68,44 @@ final class ProfileViewController: UIViewController {
             .instantiateViewController(withIdentifier: "StartScreen")
 
         window.rootViewController = startScreen
+    }
+
+    private func updateProfileDetails(profile: Profile) {
+        usernameLabel.text = profile.name
+        nicknameLabel.text = profile.loginName
+        biographyLabel.text = profile.biography
+    }
+
+    @objc private func getUserAvatarByNotification(notification: Notification) {
+        guard isViewLoaded,
+            let userInfo = notification.userInfo,
+            let userProfile = userInfo["userProfile"] as? UserProfileModel,
+            let userPictureUrl = URL(string: userProfile.profileImage.medium)
+        else { return }
+
+        updateUserAvatar(url: userPictureUrl)
+    }
+
+    private func updateUserAvatar(url: URL) {
+        // получить изображение пользователя используя Kingfisher
+        avatar.kf.indicatorType = .activity
+        avatar.kf.setImage(with: url, placeholder: UIImage(named: "placeholder-userPicture"))
+    }
+}
+
+extension ProfileViewController {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getUserAvatarByNotification(notification:)),
+            name: UserProfileRequest.didNotificationName,
+            object: nil)
+    }
+
+    private func removeObserver() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UserProfileRequest.didNotificationName,
+            object: nil)
     }
 }

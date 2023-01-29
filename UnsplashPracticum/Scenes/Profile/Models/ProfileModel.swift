@@ -7,16 +7,14 @@ import Foundation
 
 struct ProfileModel: Decodable {
     let username: String
-    let name: String
     let firstName: String
     let lastName: String
-    let profileImage: ProfileImageModel
+    let bio: String?
 
     private enum CodingKeys: String, CodingKey {
         case username
-        case name
         case firstName = "first_name"
         case lastName = "last_name"
-        case profileImage = "profile_image"
+        case bio
     }
 }

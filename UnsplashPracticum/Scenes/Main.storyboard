@@ -353,7 +353,7 @@
                                 <color key="textColor" name="Gray"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello word!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIl-gg-Qbi" userLabel="placeholder text">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello word!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIl-gg-Qbi" userLabel="biography">
                                 <rect key="frame" x="16" y="213.5" width="372" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="White"/>
@@ -380,6 +380,7 @@
                     <tabBarItem key="tabBarItem" title="" image="profile-bar" id="efc-qR-yYE"/>
                     <connections>
                         <outlet property="avatar" destination="snW-R2-HzZ" id="qRc-6u-yIv"/>
+                        <outlet property="biographyLabel" destination="oIl-gg-Qbi" id="4N7-bM-9ba"/>
                         <outlet property="logoutButton" destination="Pc5-pT-Vip" id="p5J-gx-8sh"/>
                         <outlet property="nicknameLabel" destination="923-0a-BNY" id="zBe-Ij-bWb"/>
                         <outlet property="usernameLabel" destination="Q05-Mo-biY" id="H5j-6Z-pnx"/>

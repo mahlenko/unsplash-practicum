@@ -10,13 +10,16 @@ class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
     private let session = URLSession.shared
+    private var profileRequest = ProfileRequest.shared
+
     private var tokenStorage: OAuth2Token = OAuth2TokenStorageUserDefault()
     private let authScreenSegueIdentifier = "ShowAuthenticationScreen"
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if (tokenStorage.userToken) != nil {
-            switchToTabBarController()
+
+        if let token = tokenStorage.userToken {
+            fetchProfile(token: token)
         } else {
             showScreenLogin()
         }
@@ -41,7 +44,10 @@ extension SplashViewController {
     private func showScreenLogin() {
         performSegue(withIdentifier: "ShowAuthenticationScreen", sender: self)
     }
+}
 
+extension SplashViewController {
+    // переключение между флоу
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
 
@@ -49,6 +55,31 @@ extension SplashViewController {
             .instantiateViewController(withIdentifier: "TabBarViewController")
 
         window.rootViewController = tabBarController
+    }
+
+    private func fetchProfile(token: String) {
+        profileRequest.fetchUserProfile(token: token) { [weak self] result in
+            switch result {
+            case .success:
+                guard let self else { return }
+
+                self.switchToTabBarController()
+                UIBlockingProgressHUD.dismiss()
+
+                // получим публичный профиль пользователя
+                guard let profile = self.profileRequest.profile else { return }
+                self.fetchUserProfile(username: profile.username, token: token)
+            case .failure(let error):
+                // show user error
+                ErrorToast.show(message: error.localizedDescription)
+            }
+        }
+    }
+
+    private func fetchUserProfile(username: String, token: String) {
+        UserProfileRequest.shared.fetchUserProfile(username: username, token: token) { _ in
+            print("User profile received.")
+        }
     }
 }
 
@@ -64,16 +95,13 @@ extension SplashViewController: AuthViewControllerDelegate {
         let service = OAuth2Service(urlSession: URLSession.shared)
 
         service.fetchAuthToken(code: code) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let token):
-                    guard let self else { return }
-                    self.tokenStorage.userToken = token
-                    self.switchToTabBarController()
-                    UIBlockingProgressHUD.dismiss()
-                case .failure:
-                    break
-                }
+            switch result {
+            case .success(let token):
+                guard let self else { return }
+                self.tokenStorage.userToken = token
+                self.fetchProfile(token: token)
+            case .failure:
+                break
             }
         }
     }

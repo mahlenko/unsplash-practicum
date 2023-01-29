@@ -10,21 +10,22 @@ enum FetchMethod: String {
     case POST
 }
 
-class NetworkService {
-    var lastUrlComponent: URLComponents?
-    var task: URLSessionTask?
+enum NetworkError: LocalizedError {
+    case unsplashErrorCode
+    case requiredAuthorization
 
-    private enum NetworkError: LocalizedError {
-        case unsplashErrorCode
-
-        public var errorDescription: String? {
-            switch self {
-            case .unsplashErrorCode:
-                // TODO: попробовать сделать локализацию ошибок, когда нибудь :D
-                return "Unsplash API returned an error code."
-            }
+    public var errorDescription: String? {
+        switch self {
+        case .unsplashErrorCode:
+            return "Unsplash API returned an error code."
+        case .requiredAuthorization:
+            return "Required authorization."
         }
     }
+}
+
+class NetworkService {
+    var task: URLSessionTask?
 
     private let urlSession: URLSession
 
@@ -37,14 +38,13 @@ class NetworkService {
 
         //
         assert(Thread.isMainThread)
-        guard urlComponent != lastUrlComponent else { return }
         task?.cancel()
-        lastUrlComponent = urlComponent
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
-        if method != .GET, let query = urlComponent.query {
+        if method.rawValue != FetchMethod.GET.rawValue,
+            let query = urlComponent.query {
             request.httpBody = Data(query.utf8)
         }
 
@@ -55,7 +55,6 @@ class NetworkService {
         }
 
         let task = urlSession.dataTask(with: request) { data, response, error in
-            self.lastUrlComponent = nil
             self.task = nil
 
             if let error = error { completion(.failure(error)) }
@@ -66,8 +65,16 @@ class NetworkService {
                 completion(.failure(NetworkError.unsplashErrorCode))
             }
 
+            // для запроса требуется авторизация
+            if let response = response as? HTTPURLResponse,
+                response.statusCode == 401 {
+                completion(.failure(NetworkError.requiredAuthorization))
+            }
+
             guard let data = data else { return }
-            completion(.success(data))
+            DispatchQueue.main.async {
+                completion(.success(data))
+            }
         }
 
         self.task = task
