@@ -8,18 +8,20 @@ import Drops
 import Kingfisher
 
 final class ProfileViewController: UIViewController {
-    // MARK: - Outlets
-    @IBOutlet private weak var avatar: UIImageView!
-    @IBOutlet private weak var usernameLabel: UILabel!
-    @IBOutlet private weak var nicknameLabel: UILabel!
-    @IBOutlet private weak var biographyLabel: UILabel!
-    @IBOutlet private weak var logoutButton: UIButton!
+    // MARK: - UI elements
+    internal var avatarImageView = UIImageView()
+    internal var usernameLabel = UILabel()
+    internal var nicknameLabel = UILabel()
+    internal var biographyLabel = UILabel()
+    internal var logoutButton = UIButton()
 
     private let profileRequest = ProfileRequest.shared
     private let userProfileRequest = UserProfileRequest.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        configureUI()
 
         guard let profile = profileRequest.profile else { return }
         updateProfileDetails(profile: profile)
@@ -88,8 +90,8 @@ final class ProfileViewController: UIViewController {
 
     private func updateUserAvatar(url: URL) {
         // получить изображение пользователя используя Kingfisher
-        avatar.kf.indicatorType = .activity
-        avatar.kf.setImage(with: url, placeholder: UIImage(named: "placeholder-userPicture"))
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder-userPicture"))
     }
 }
 
