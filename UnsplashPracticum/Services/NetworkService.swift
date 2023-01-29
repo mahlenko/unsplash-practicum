@@ -41,6 +41,7 @@ class NetworkService {
         task?.cancel()
 
         var request = URLRequest(url: url)
+        request.timeoutInterval = 2.0
         request.httpMethod = method.rawValue
 
         if method.rawValue != FetchMethod.GET.rawValue,
