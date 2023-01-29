@@ -7,8 +7,8 @@ import Foundation
 import Drops
 
 enum ErrorToast {
-    static func show(message: String) {
-        Drops.show(Drop(title: "Oops!", subtitle: message, position: .top, duration: .seconds(4)))
+    static func show(message: String, title: String = "Что-то пошло не так") {
+        Drops.show(Drop(title: title, subtitle: message, position: .top, duration: .seconds(4)))
         print(message)
     }
 }
