@@ -62,7 +62,7 @@ final class ProfileViewController: UIViewController {
     private func userLogout() {
         guard let window = UIApplication.shared.windows.first else { return }
 
-        OAuth2TokenStorageUserDefault().userToken = nil
+        OAuth2TokenStorage().userToken = nil
 
         let startScreen = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "StartScreen")

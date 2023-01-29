@@ -13,6 +13,7 @@
 		8BCD68BA28FDB599006D1BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCD68B928FDB599006D1BFC /* AppDelegate.swift */; };
 		8BCD68BC28FDB599006D1BFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCD68BB28FDB599006D1BFC /* SceneDelegate.swift */; };
 		8BCD68C328FDB59A006D1BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCD68C228FDB59A006D1BFC /* Assets.xcassets */; };
+		8BFAAC082986BEB500F2A8CB /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 8BFAAC072986BEB500F2A8CB /* SwiftKeychainWrapper */; };
 		FB30E1A6DE3B8864F36D8EF8 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E9F350604B462EE76A5C /* UIColor.swift */; };
 		FB30E2DED6F8B1CBCC6BB5AB /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E2C3040B6E9D4AED2193 /* Profile.swift */; };
 		FB30E2E4D4F424291C578BED /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E871A42D905E51A81831 /* ImagesListViewController.swift */; };
@@ -86,6 +87,7 @@
 			files = (
 				8B2C19172986B49500D5DDFF /* Kingfisher in Frameworks */,
 				8B762F4E2972CD7C00DACB9C /* ProgressHUD in Frameworks */,
+				8BFAAC082986BEB500F2A8CB /* SwiftKeychainWrapper in Frameworks */,
 				8B762F51297327D600DACB9C /* Drops in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +274,7 @@
 				8B762F4D2972CD7C00DACB9C /* ProgressHUD */,
 				8B762F50297327D600DACB9C /* Drops */,
 				8B2C19162986B49500D5DDFF /* Kingfisher */,
+				8BFAAC072986BEB500F2A8CB /* SwiftKeychainWrapper */,
 			);
 			productName = UnsplashPracticum;
 			productReference = 8BCD68B628FDB599006D1BFC /* UnsplashPracticum.app */;
@@ -307,6 +310,7 @@
 				8B762F4C2972CD7C00DACB9C /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				8B762F4F297327D600DACB9C /* XCRemoteSwiftPackageReference "Drops" */,
 				8B2C19152986B49500D5DDFF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				8BFAAC062986BEB500F2A8CB /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = 8BCD68B728FDB599006D1BFC /* Products */;
 			projectDirPath = "";
@@ -605,6 +609,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8BFAAC062986BEB500F2A8CB /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -622,6 +634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B762F4F297327D600DACB9C /* XCRemoteSwiftPackageReference "Drops" */;
 			productName = Drops;
+		};
+		8BFAAC072986BEB500F2A8CB /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BFAAC062986BEB500F2A8CB /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

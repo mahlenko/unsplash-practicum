@@ -12,7 +12,7 @@ class SplashViewController: UIViewController {
     private let session = URLSession.shared
     private var profileRequest = ProfileRequest.shared
 
-    private var tokenStorage: OAuth2Token = OAuth2TokenStorageUserDefault()
+    private var tokenStorage: OAuth2Token = OAuth2TokenStorage()
     private let authScreenSegueIdentifier = "ShowAuthenticationScreen"
 
     override func viewDidAppear(_ animated: Bool) {
