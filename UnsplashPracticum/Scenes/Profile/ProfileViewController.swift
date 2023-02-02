@@ -12,11 +12,11 @@ final class ProfileViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
     // MARK: - UI elements
-    internal var avatarImageView = UIImageView()
-    internal var usernameLabel = UILabel()
-    internal var nicknameLabel = UILabel()
-    internal var biographyLabel = UILabel()
-    internal var logoutButton = UIButton()
+    private let avatarImageView = UIImageView()
+    private let usernameLabel = UILabel()
+    private let nicknameLabel = UILabel()
+    private let biographyLabel = UILabel()
+    private let logoutButton = UIButton()
 
     private let profileRequest = ProfileRequest.shared
     private let userProfileRequest = UserProfileRequest.shared
@@ -34,17 +34,15 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         addObserver()
     }
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        addObserver()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeObserver()
     }
-
-    deinit { removeObserver() }
 
     @IBAction func tapLogoutButton(_ sender: Any) {
         // нужно использовать делегат и доступ к OAuth2Token.
@@ -83,11 +81,9 @@ final class ProfileViewController: UIViewController {
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             // Массив полученных записей удаляем из хранилища.
             records.forEach { record in
-                WKWebsiteDataStore.default()
-                    .removeData(
-                        ofTypes: record.dataTypes,
-                        for: [record],
-                        completionHandler: {})
+                WKWebsiteDataStore.default().removeData(
+                    ofTypes: record.dataTypes,
+                    for: [record]) {}
             }
         }
     }
@@ -112,6 +108,101 @@ final class ProfileViewController: UIViewController {
         // получить изображение пользователя используя Kingfisher
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder-userPicture"))
+    }
+
+    // MARK: - UI Configuration
+
+    func configureScreen() {
+        view.backgroundColor = UIColor.backgroundBrand
+
+        configureAvatarImageView()
+        configureUsernameLabel()
+        configureNicknameLabel()
+        configureBiographyLabel()
+        configureLogoutButton()
+
+        setConstraints()
+    }
+
+    func configureAvatarImageView() {
+        avatarImageView.image = UIImage(named: "avatar")
+        avatarImageView.layer.cornerRadius = 35
+        avatarImageView.clipsToBounds = true
+
+        avatarImageView.contentMode = .scaleAspectFill
+
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(avatarImageView)
+    }
+
+    func configureUsernameLabel() {
+        usernameLabel.text = "Your name"
+
+        usernameLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        usernameLabel.textColor = UIColor.whiteBrand
+
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(usernameLabel)
+    }
+
+    func configureNicknameLabel() {
+        nicknameLabel.text = "@placeholder"
+
+        nicknameLabel.font = UIFont.systemFont(ofSize: 13)
+        nicknameLabel.textColor = UIColor.grayBrand
+
+        nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(nicknameLabel)
+    }
+
+    func configureBiographyLabel() {
+        biographyLabel.text = "Placeholder user biography."
+
+        biographyLabel.font = UIFont.systemFont(ofSize: 13)
+        biographyLabel.textColor = UIColor.whiteBrand
+
+        biographyLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(biographyLabel)
+    }
+
+    func configureLogoutButton() {
+        logoutButton.setBackgroundImage(UIImage(named: "logout-active"), for: .normal)
+
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logoutButton)
+
+        logoutButton.addTarget(self, action: #selector(tapLogoutButton), for: .touchUpInside)
+    }
+
+    func setConstraints() {
+        let trailingAnchor = view.layoutMarginsGuide.trailingAnchor
+        let leadingAnchor = view.layoutMarginsGuide.leadingAnchor
+        let safeAreaTopAnchor = view.safeAreaLayoutGuide.topAnchor
+
+        // user picture
+        avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        avatarImageView.topAnchor.constraint(equalTo: safeAreaTopAnchor, constant: 32).isActive = true
+        avatarImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        avatarImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+
+        // user name
+        usernameLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        usernameLabel.trailingAnchor.constraint(
+            greaterThanOrEqualToSystemSpacingAfter: trailingAnchor,
+            multiplier: 16).isActive = true
+        usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8).isActive = true
+
+        // nickname
+        nicknameLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        nicknameLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8).isActive = true
+
+        // biography
+        biographyLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        biographyLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8).isActive = true
+
+        // logout
+        logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        logoutButton.topAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: -11).isActive = true
     }
 }
 

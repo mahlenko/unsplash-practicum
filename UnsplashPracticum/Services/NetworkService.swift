@@ -41,7 +41,7 @@ class NetworkService {
         }
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 10.0
+        request.timeoutInterval = 10
         request.httpMethod = method.rawValue
 
         if method.rawValue != FetchMethod.GET.rawValue, let query = urlComponent.query {

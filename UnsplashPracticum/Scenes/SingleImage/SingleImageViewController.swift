@@ -5,6 +5,7 @@
 
 import UIKit
 import Kingfisher
+import Drops
 
 final class SingleImageViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -38,7 +39,13 @@ final class SingleImageViewController: UIViewController {
                 case .success(let imageResult):
                     self.rescaleAndCenterImageInScrollView(contentSize: imageResult.image.size)
                 case .failure(let error):
-                    ErrorToast.show(message: error.localizedDescription)
+                    ErrorToast.show(message: "Не удалось загрузить изображение.", action: .init(
+                        icon: UIImage(systemName: "repeat")
+                    ) { [weak self] in
+                        guard let self = self else { return }
+                        self.displayImage()
+                        Drops.hideCurrent()
+                    })
                 }
             }
         }

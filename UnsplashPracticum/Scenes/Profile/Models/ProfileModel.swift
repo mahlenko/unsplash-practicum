@@ -6,9 +6,9 @@
 import Foundation
 
 struct ProfileModel: Decodable {
-    let username: String
-    let firstName: String
-    let lastName: String
+    let username: String?
+    let firstName: String?
+    let lastName: String?
     let bio: String?
 
     private enum CodingKeys: String, CodingKey {

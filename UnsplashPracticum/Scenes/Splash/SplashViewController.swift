@@ -5,6 +5,7 @@
 
 import Foundation
 import UIKit
+import Drops
 
 class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -20,15 +21,19 @@ class SplashViewController: UIViewController {
 
         configureScreen()
 
+        showAuthOrAppScreen()
+    }
+}
+
+extension SplashViewController {
+    private func showAuthOrAppScreen () {
         if let token = tokenStorage.userToken {
             fetchProfile(token: token)
         } else {
             showScreenLogin()
         }
     }
-}
 
-extension SplashViewController {
     private func showScreenLogin() {
         guard let authController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController
@@ -53,20 +58,26 @@ extension SplashViewController {
     }
 
     private func fetchProfile(token: String) {
+        UIBlockingProgressHUD.show()
+
         profileRequest.fetchUserProfile(token: token) { [weak self] result in
-            guard let self else { return }
+            UIBlockingProgressHUD.dismiss()
 
             switch result {
             case .success:
-                self.switchToTabBarController()
-                UIBlockingProgressHUD.dismiss()
-
-                // получим публичный профиль пользователя
+                guard let self else { return }
                 guard let profile = self.profileRequest.profile else { return }
                 self.fetchUserProfile(username: profile.username, token: token)
+
+                self.switchToTabBarController()
             case .failure(let error):
-                // show user error
-                ErrorToast.show(message: error.localizedDescription)
+                ErrorToast.show(
+                    message: error.localizedDescription,
+                    action: .init(icon: UIImage(systemName: "repeat")) { [weak self] in
+                        guard let self else { return }
+                        self.fetchProfile(token: token)
+                        Drops.hideCurrent()
+                    })
             }
         }
     }
@@ -78,9 +89,12 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
-        UIBlockingProgressHUD.show()
-        getTokenAuthorize(code: code)
-        dismiss(animated: true)
+        viewController.dismiss(animated: true) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.getTokenAuthorize(code: code)
+        }
     }
 
     private func getTokenAuthorize(code: String ) {
@@ -92,8 +106,15 @@ extension SplashViewController: AuthViewControllerDelegate {
                 guard let self else { return }
                 self.tokenStorage.userToken = token
                 self.fetchProfile(token: token)
-            case .failure:
-                break
+            case .failure(let error):
+                ErrorToast.show(
+                    message: error.localizedDescription,
+                    title: "Ошибка авторизации",
+                    action: .init(icon: UIImage(systemName: "repeat")) { [weak self] in
+                        guard let self else { return }
+                        self.getTokenAuthorize(code: code)
+                        Drops.hideCurrent()
+                    })
             }
         }
     }

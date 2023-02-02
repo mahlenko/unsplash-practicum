@@ -15,6 +15,7 @@ final class AuthViewController: UIViewController {
         case "webViewSegue":
             guard let webViewVC = segue.destination as? WebViewViewController else { return }
             webViewVC.delegate = self
+            webViewVC.modalPresentationStyle = .fullScreen
         default:
             super.prepare(for: segue, sender: sender)
         }
