@@ -19,16 +19,19 @@ class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
 
         configureScreen()
+        showAuthOrAppScreen()
+    }
+}
 
+extension SplashViewController {
+    private func showAuthOrAppScreen () {
         if let token = tokenStorage.userToken {
             fetchProfile(token: token)
         } else {
             showScreenLogin()
         }
     }
-}
 
-extension SplashViewController {
     private func showScreenLogin() {
         guard let authController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController
@@ -54,36 +57,32 @@ extension SplashViewController {
 
     private func fetchProfile(token: String) {
         profileRequest.fetchUserProfile(token: token) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+
             switch result {
             case .success:
                 guard let self else { return }
-
-                self.switchToTabBarController()
-                UIBlockingProgressHUD.dismiss()
-
-                // получим публичный профиль пользователя
                 guard let profile = self.profileRequest.profile else { return }
                 self.fetchUserProfile(username: profile.username, token: token)
+
+                self.switchToTabBarController()
             case .failure(let error):
-                // show user error
                 ErrorToast.show(message: error.localizedDescription)
             }
         }
     }
 
     private func fetchUserProfile(username: String, token: String) {
-        UserProfileRequest.shared.fetchUserProfile(username: username, token: token) { _ in
-            print("User profile received.")
-        }
+        UserProfileRequest.shared.fetchUserProfile(username: username, token: token) { _ in }
     }
 }
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
         UIBlockingProgressHUD.show()
-        dismiss(animated: true) {
-            self.getTokenAuthorize(code: code)
-        }
+        getTokenAuthorize(code: code)
+
+        dismiss(animated: true)
     }
 
     private func getTokenAuthorize(code: String ) {
@@ -95,8 +94,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                 guard let self else { return }
                 self.tokenStorage.userToken = token
                 self.fetchProfile(token: token)
-            case .failure:
-                break
+            case .failure(let error):
+                ErrorToast.show(message: error.localizedDescription, title: "Ошибка авторизации")
             }
         }
     }

@@ -26,7 +26,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKa-ZE-RDa">
-                                <rect key="frame" x="16" y="688" width="382" height="50"/>
+                                <rect key="frame" x="16" y="722" width="382" height="50"/>
                                 <color key="backgroundColor" name="White"/>
                                 <color key="tintColor" name="Black"/>
                                 <state key="normal" title="Button"/>
@@ -49,7 +49,7 @@
                             <constraint firstItem="uPN-DK-9l7" firstAttribute="centerX" secondItem="Ref-8O-9sq" secondAttribute="centerX" id="R2Q-NR-mv5"/>
                             <constraint firstItem="YUT-yq-JRL" firstAttribute="trailing" secondItem="nKa-ZE-RDa" secondAttribute="trailing" constant="16" id="dVC-uW-z69"/>
                             <constraint firstItem="uPN-DK-9l7" firstAttribute="centerY" secondItem="Ref-8O-9sq" secondAttribute="centerY" id="g5S-Ux-UnH"/>
-                            <constraint firstItem="YUT-yq-JRL" firstAttribute="bottom" secondItem="nKa-ZE-RDa" secondAttribute="bottom" constant="124" id="jJJ-0K-wWg"/>
+                            <constraint firstItem="YUT-yq-JRL" firstAttribute="bottom" secondItem="nKa-ZE-RDa" secondAttribute="bottom" constant="90" id="jJJ-0K-wWg"/>
                             <constraint firstItem="nKa-ZE-RDa" firstAttribute="leading" secondItem="YUT-yq-JRL" secondAttribute="leading" constant="16" id="oKQ-LO-kCM"/>
                         </constraints>
                     </view>

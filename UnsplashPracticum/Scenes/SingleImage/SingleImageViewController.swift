@@ -50,8 +50,6 @@ final class SingleImageViewController: UIViewController {
     }
 
     private func centeredImage() {
-        print("↔️↕️Centering the image on the screen...")
-
         scrollView.layoutIfNeeded()
 
         let viewSize = scrollView.bounds.size
@@ -64,8 +62,6 @@ final class SingleImageViewController: UIViewController {
         scrollView.setContentOffset(
             CGPoint(x: offset.left, y: offset.top),
             animated: false)
-
-        print("Offsets: \(offset)")
     }
 
     // MARK: - Actions

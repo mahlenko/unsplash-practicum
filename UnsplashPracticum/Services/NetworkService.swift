@@ -58,22 +58,22 @@ class NetworkService {
         let task = urlSession.dataTask(with: request) { data, response, error in
             self.task = nil
 
-            if let error = error { completion(.failure(error)) }
-
-            if let response = response as? HTTPURLResponse,
-                response.statusCode <= 199,
-                response.statusCode >= 300 {
-                completion(.failure(NetworkError.unsplashErrorCode))
-            }
-
-            // для запроса требуется авторизация
-            if let response = response as? HTTPURLResponse,
-                response.statusCode == 401 {
-                completion(.failure(NetworkError.requiredAuthorization))
-            }
-
-            guard let data = data else { return }
             DispatchQueue.main.async {
+                if let error = error { completion(.failure(error)) }
+
+                if let response = response as? HTTPURLResponse,
+                    response.statusCode <= 199,
+                    response.statusCode >= 300 {
+                    return completion(.failure(NetworkError.unsplashErrorCode))
+                }
+
+                // для запроса требуется авторизация
+                if let response = response as? HTTPURLResponse,
+                    response.statusCode == 401 {
+                    return completion(.failure(NetworkError.requiredAuthorization))
+                }
+
+                guard let data = data else { return }
                 completion(.success(data))
             }
         }

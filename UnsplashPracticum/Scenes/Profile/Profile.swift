@@ -14,4 +14,12 @@ struct Profile {
     var avatar: UIImage?
     var name: String { "\(firstName) \(lastName)" }
     var loginName: String { "@\(username)" }
+
+    static func convert(from profile: ProfileModel) -> Profile {
+        Profile(
+            firstName: profile.firstName ?? "",
+            lastName: profile.lastName ?? "",
+            username: profile.username ?? "",
+            biography: profile.bio)
+    }
 }

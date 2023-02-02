@@ -21,12 +21,8 @@ class ProfileRequest: NetworkService {
                 guard let self else { return }
                 do {
                     let profile = try JSONDecoder().decode(ProfileModel.self, from: data)
-                    //
-                    self.profile = Profile(
-                        firstName: profile.firstName,
-                        lastName: profile.lastName,
-                        username: profile.username,
-                        biography: profile.bio)
+
+                    self.profile = Profile.convert(from: profile)
 
                     completion(.success(profile))
                 } catch {
