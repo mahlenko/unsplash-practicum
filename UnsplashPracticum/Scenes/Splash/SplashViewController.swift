@@ -5,6 +5,7 @@
 
 import Foundation
 import UIKit
+import Drops
 
 class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -19,6 +20,7 @@ class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
 
         configureScreen()
+
         showAuthOrAppScreen()
     }
 }
@@ -56,6 +58,8 @@ extension SplashViewController {
     }
 
     private func fetchProfile(token: String) {
+        UIBlockingProgressHUD.show()
+
         profileRequest.fetchUserProfile(token: token) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
 
@@ -67,7 +71,13 @@ extension SplashViewController {
 
                 self.switchToTabBarController()
             case .failure(let error):
-                ErrorToast.show(message: error.localizedDescription)
+                ErrorToast.show(
+                    message: error.localizedDescription,
+                    action: .init(icon: UIImage(systemName: "repeat")) { [weak self] in
+                        guard let self else { return }
+                        self.fetchProfile(token: token)
+                        Drops.hideCurrent()
+                    })
             }
         }
     }
@@ -79,9 +89,7 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
-        UIBlockingProgressHUD.show()
         getTokenAuthorize(code: code)
-
         dismiss(animated: true)
     }
 
@@ -95,7 +103,14 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.tokenStorage.userToken = token
                 self.fetchProfile(token: token)
             case .failure(let error):
-                ErrorToast.show(message: error.localizedDescription, title: "Ошибка авторизации")
+                ErrorToast.show(
+                    message: error.localizedDescription,
+                    title: "Ошибка авторизации",
+                    action: .init(icon: UIImage(systemName: "repeat")) { [weak self] in
+                        guard let self else { return }
+                        self.getTokenAuthorize(code: code)
+                        Drops.hideCurrent()
+                    })
             }
         }
     }
