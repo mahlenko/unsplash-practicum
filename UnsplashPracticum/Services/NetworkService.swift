@@ -59,7 +59,6 @@ class NetworkService {
             lastUrlComponents?.url == urlComponent.url,
             lastUrlComponents?.query == urlComponent.query,
             task != nil {
-                print("✅ Cancel request fetch. The task is already running.")
                 return
             }
 
@@ -67,22 +66,22 @@ class NetworkService {
             self.task = nil
             self.lastUrlComponents = nil
 
-            if let error = error { completion(.failure(error)) }
-
-            if let response = response as? HTTPURLResponse,
-                response.statusCode <= 199,
-                response.statusCode >= 300 {
-                completion(.failure(NetworkError.unsplashErrorCode))
-            }
-
-            // для запроса требуется авторизация
-            if let response = response as? HTTPURLResponse,
-                response.statusCode == 401 {
-                completion(.failure(NetworkError.requiredAuthorization))
-            }
-
-            guard let data = data else { return }
             DispatchQueue.main.async {
+                if let error = error { completion(.failure(error)) }
+
+                if let response = response as? HTTPURLResponse,
+                    response.statusCode <= 199,
+                    response.statusCode >= 300 {
+                    return completion(.failure(NetworkError.unsplashErrorCode))
+                }
+
+                // для запроса требуется авторизация
+                if let response = response as? HTTPURLResponse,
+                    response.statusCode == 401 {
+                    return completion(.failure(NetworkError.requiredAuthorization))
+                }
+
+                guard let data = data else { return }
                 completion(.success(data))
             }
         }
