@@ -89,8 +89,12 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
-        getTokenAuthorize(code: code)
-        dismiss(animated: true)
+        viewController.dismiss(animated: true) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.getTokenAuthorize(code: code)
+        }
     }
 
     private func getTokenAuthorize(code: String ) {
