@@ -54,10 +54,10 @@ extension SplashViewController {
 
     private func fetchProfile(token: String) {
         profileRequest.fetchUserProfile(token: token) { [weak self] result in
+            guard let self else { return }
+
             switch result {
             case .success:
-                guard let self else { return }
-
                 self.switchToTabBarController()
                 UIBlockingProgressHUD.dismiss()
 
@@ -72,18 +72,15 @@ extension SplashViewController {
     }
 
     private func fetchUserProfile(username: String, token: String) {
-        UserProfileRequest.shared.fetchUserProfile(username: username, token: token) { _ in
-            print("User profile received.")
-        }
+        UserProfileRequest.shared.fetchUserProfile(username: username, token: token) { _ in }
     }
 }
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
         UIBlockingProgressHUD.show()
-        dismiss(animated: true) {
-            self.getTokenAuthorize(code: code)
-        }
+        getTokenAuthorize(code: code)
+        dismiss(animated: true)
     }
 
     private func getTokenAuthorize(code: String ) {

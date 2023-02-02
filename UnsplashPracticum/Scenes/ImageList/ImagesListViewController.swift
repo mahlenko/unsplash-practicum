@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 // MARK: - ViewController
 
@@ -16,7 +17,9 @@ final class ImagesListViewController: UIViewController {
 
     private let showSingleImageSegueId = "ShowSingleImage"
 
-    private var photosName: [String] = []
+    private let notificationCenter: NotificationCenter = .default
+    private let imagesListService: PhotoRequest = PhotoRequest(urlSession: URLSession.shared)
+    private var imagesListObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,16 +28,32 @@ final class ImagesListViewController: UIViewController {
         imageFeedTable.delegate = self
         imageFeedTable.backgroundColor = .backgroundBrand
 
-        photosName = Array(0..<20).map { "\($0)" }
+        fetchPhotos()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        observeImagesListChanges()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopObservingImagesListChanges()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
+        // просмотр фото
         case showSingleImageSegueId:
-            let viewController = segue.destination as! SingleImageViewController
-            let indexPath = sender as! IndexPath
-            let image = UIImage(named: photosName[indexPath.row])
-            viewController.image = image
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let indexPath = sender as? IndexPath
+            else { return }
+
+            let photo = PhotoRequest.shared.photos[indexPath.row]
+            viewController.picture = SingleImageViewModel(
+                url: photo.largeImageURL,
+                size: photo.size)
         default:
             super.prepare(for: segue, sender: sender)
         }
@@ -48,24 +67,54 @@ final class ImagesListViewController: UIViewController {
     }()
 }
 
+extension ImagesListViewController {
+    private func observeImagesListChanges() {
+        imagesListObserver = notificationCenter.addObserver(
+            forName: PhotoRequest.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.updateTableViewAnimated()
+        }
+    }
+
+    private func stopObservingImagesListChanges() {
+        if let imagesListObserver {
+            notificationCenter.removeObserver(imagesListObserver)
+        }
+    }
+
+    private func updateTableViewAnimated() {
+        let countRows = imageFeedTable.numberOfRows(inSection: 0)
+        let photoCount = PhotoRequest.shared.photos.count
+
+        if countRows < photoCount {
+            let newIndexPath = (countRows ..< photoCount).map {
+                IndexPath(row: $0, section: 0)
+            }
+
+            imageFeedTable.performBatchUpdates {
+                imageFeedTable.insertRows(at: newIndexPath, with: .automatic)
+            }
+        }
+    }
+}
+
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: showSingleImageSegueId, sender: indexPath)
     }
 
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
-            return 0
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == PhotoRequest.shared.photos.count {
+            fetchPhotos()
         }
-
-        let ratio = image.size.height / image.size.width
-        return (view.frame.width - 32) * ratio
     }
 }
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        photosName.count
+        PhotoRequest.shared.photos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,23 +124,79 @@ extension ImagesListViewController: UITableViewDataSource {
             return ImagesListCell(style: .default, reuseIdentifier: ImagesListCell.reuseIdentifier)
         }
 
-        configCell(for: imageListCell, with: indexPath)
+        updateRow(for: imageListCell, with: indexPath)
+        imageListCell.delegate = self
 
         return imageListCell
     }
 }
 
+extension ImagesListViewController: ImagesListCellDelegate {
+    func didTapLike(_ cell: ImagesListCell) {
+        guard
+            let indexPath = imageFeedTable.indexPath(for: cell),
+            var picture = PhotoRequest.shared.photos[indexPath.row] as? PhotoViewModel
+        else { return }
+
+        LikeRequest(urlSession: URLSession.shared)
+            .sendChangeLike(
+                id: picture.id,
+                currentStatus: picture.isLiked
+            ) { [weak self] result in
+                guard let self else { return }
+
+                switch result {
+                case .success(let data):
+                    picture.updateLike(like: data.isLiked)
+                    self.setImageLikeButton(picture: data, cell: cell)
+                case .failure(let error):
+                    ErrorToast.show(message: error.localizedDescription)
+                }
+            }
+    }
+
+    func setImageLikeButton(picture: PhotoViewModel, cell: ImagesListCell) {
+        if picture.isLiked {
+            cell.likeButton.imageView?.image = UIImage(named: "heart-active")
+        } else {
+            cell.likeButton.imageView?.image = UIImage(named: "heart-default")
+        }
+    }
+}
+
 extension ImagesListViewController {
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
-            return
+    func fetchPhotos() {
+        PhotoRequest.shared.fetchPhotoNextPage { result in
+            switch result {
+            case .success: break
+            case .failure(let error):
+                ErrorToast.show(message: error.localizedDescription)
+            }
+        }
+    }
+
+    func updateRow(for cell: ImagesListCell, with indexPath: IndexPath) {
+        guard let picture = PhotoRequest.shared.photos[indexPath.row] as? PhotoViewModel
+        else { return }
+
+        cell.dateLabel.text = (picture.createdAt != nil) ? dateFormatter.string(from: picture.createdAt!) : ""
+
+        if let url = URL(string: picture.thumbImageURL) {
+            let cache = ImageCache.default
+            cache.memoryStorage.config.expiration = .seconds(60 * 20)
+
+            cell.imageCell.kf.indicatorType = .activity
+            cell.imageCell.kf.setImage(
+                with: url,
+                // тут не по ТЗ изображение, попробовал использовать blurhash исходя из того, что он есть в API
+                placeholder: UIImage(blurHash: picture.blurHash, size: CGSize(width: 32, height: 100))
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.imageFeedTable.reloadRows(at: [indexPath], with: .automatic)
+            }
         }
 
-        cell.imageCell.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-
-        // mock liked button
-        if (indexPath.row % 2) != 0 {
+        if picture.isLiked {
             like(cell.likeButton)
         } else {
             dislike(cell.likeButton)

@@ -8,6 +8,7 @@ import Foundation
 enum FetchMethod: String {
     case GET
     case POST
+    case DELETE
 }
 
 enum NetworkError: LocalizedError {
@@ -26,6 +27,7 @@ enum NetworkError: LocalizedError {
 
 class NetworkService {
     var task: URLSessionTask?
+    var lastUrlComponents: URLComponents?
 
     private let urlSession: URLSession
 
@@ -33,19 +35,16 @@ class NetworkService {
         self.urlSession = urlSession ?? URLSession.shared
     }
 
-    func fetch(method: FetchMethod, urlComponent: URLComponents, headers: [(key: String, value: String)] = [], completion: @escaping (Result<Data, Error>) -> Void) {
-        guard let url = urlComponent.url else { fatalError("Oops, something went wrong.")}
-
-        //
-        assert(Thread.isMainThread)
-        task?.cancel()
+    internal func fetch(method: FetchMethod, urlComponent: URLComponents, headers: [(key: String, value: String)] = [], completion: @escaping (Result<Data, Error>) -> Void) {
+        guard let url = urlComponent.url else {
+            fatalError("Oops, something went wrong.")
+        }
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 2.0
+        request.timeoutInterval = 10.0
         request.httpMethod = method.rawValue
 
-        if method.rawValue != FetchMethod.GET.rawValue,
-            let query = urlComponent.query {
+        if method.rawValue != FetchMethod.GET.rawValue, let query = urlComponent.query {
             request.httpBody = Data(query.utf8)
         }
 
@@ -55,8 +54,18 @@ class NetworkService {
             }
         }
 
+        assert(Thread.isMainThread)
+        if
+            lastUrlComponents?.url == urlComponent.url,
+            lastUrlComponents?.query == urlComponent.query,
+            task != nil {
+                print("✅ Cancel request fetch. The task is already running.")
+                return
+            }
+
         let task = urlSession.dataTask(with: request) { data, response, error in
             self.task = nil
+            self.lastUrlComponents = nil
 
             if let error = error { completion(.failure(error)) }
 
@@ -79,6 +88,7 @@ class NetworkService {
         }
 
         self.task = task
+        lastUrlComponents = urlComponent
         task.resume()
     }
 }

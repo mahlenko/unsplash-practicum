@@ -6,6 +6,7 @@
 import UIKit
 import Drops
 import Kingfisher
+import WebKit
 
 final class ProfileViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -67,11 +68,28 @@ final class ProfileViewController: UIViewController {
         guard let window = UIApplication.shared.windows.first else { return }
 
         OAuth2TokenStorage().userToken = nil
+        cleanCookies()
 
         let startScreen = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "StartScreen")
 
         window.rootViewController = startScreen
+    }
+
+    private func cleanCookies() {
+        // Очищаем все куки из хранилища.
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        // Запрашиваем все данные из локального хранилища.
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            // Массив полученных записей удаляем из хранилища.
+            records.forEach { record in
+                WKWebsiteDataStore.default()
+                    .removeData(
+                        ofTypes: record.dataTypes,
+                        for: [record],
+                        completionHandler: {})
+            }
+        }
     }
 
     private func updateProfileDetails(profile: Profile) {
