@@ -10,6 +10,8 @@ import UIKit
 // MARK: - ViewController
 
 final class ImagesListViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+
     @IBOutlet private weak var imageFeedTable: UITableView!
 
     private let showSingleImageSegueId = "ShowSingleImage"

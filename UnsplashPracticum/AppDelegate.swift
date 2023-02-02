@@ -17,13 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UISceneSession Lifecycle
 
     func application(
-            _: UIApplication,
-            configurationForConnecting connectingSceneSession: UISceneSession,
-            options _: UIScene.ConnectionOptions
+        _: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options _: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
-        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        let sceneConfiguration = UISceneConfiguration(name: "Main", sessionRole: connectingSceneSession.role)
+        sceneConfiguration.delegateClass = SceneDelegate.self
+
+        return sceneConfiguration
     }
 
     func application(_: UIApplication, didDiscardSceneSessions _: Set<UISceneSession>) {
