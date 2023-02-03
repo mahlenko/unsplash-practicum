@@ -179,30 +179,32 @@ final class ProfileViewController: UIViewController {
         let leadingAnchor = view.layoutMarginsGuide.leadingAnchor
         let safeAreaTopAnchor = view.safeAreaLayoutGuide.topAnchor
 
-        // user picture
-        avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        avatarImageView.topAnchor.constraint(equalTo: safeAreaTopAnchor, constant: 32).isActive = true
-        avatarImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        avatarImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        NSLayoutConstraint.activate([
+            // user picture
+            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaTopAnchor, constant: 32),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 70),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 70),
 
-        // user name
-        usernameLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        usernameLabel.trailingAnchor.constraint(
-            greaterThanOrEqualToSystemSpacingAfter: trailingAnchor,
-            multiplier: 16).isActive = true
-        usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8).isActive = true
+            // user name
+            usernameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            usernameLabel.trailingAnchor.constraint(
+                greaterThanOrEqualToSystemSpacingAfter: trailingAnchor,
+                multiplier: 16),
+            usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
 
-        // nickname
-        nicknameLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        nicknameLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8).isActive = true
+            // nickname
+            nicknameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            nicknameLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8),
 
-        // biography
-        biographyLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        biographyLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8).isActive = true
+            // biography
+            biographyLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            biographyLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8),
 
-        // logout
-        logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        logoutButton.topAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: -11).isActive = true
+            // logout
+            logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            logoutButton.topAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: -11)
+        ])
     }
 }
 
