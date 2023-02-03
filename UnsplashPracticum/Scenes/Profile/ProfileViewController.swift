@@ -198,7 +198,7 @@ final class ProfileViewController: UIViewController {
 
         // biography
         biographyLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        biographyLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8).isActive = true
+        biographyLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8).isActive = true
 
         // logout
         logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
