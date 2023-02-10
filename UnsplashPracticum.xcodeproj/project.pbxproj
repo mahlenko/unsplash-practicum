@@ -55,6 +55,7 @@
 		FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */; };
 		FB30EF39C11540C824DB81F2 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E67BA3979AC9BCA31093 /* UIBlockingProgressHUD.swift */; };
 		FB30EFB755B5FA4D650D1082 /* PhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30ECDA646AA35E0FA6B34D /* PhotoRequest.swift */; };
+		FB30EFF2253E20106599A78C /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA56CFE8CD6C3AFAB038 /* Shimmer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		FB30E9F350604B462EE76A5C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		FB30EA2592EF634A55DD4AE2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		FB30EA56CFE8CD6C3AFAB038 /* Shimmer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		FB30EA7C800B0B4321848BCC /* UserProfileRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileRequest.swift; sourceTree = "<group>"; };
 		FB30EA823E4130B726CA4AE0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FB30EAAA42F7A7AD149E2A3B /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -176,8 +178,17 @@
 				FB30E7D2417B7937FE827491 /* Extensions */,
 				FB30E4BDA57520987BBAF24E /* Scenes */,
 				FB30E6A463A1FDD4AC0E13EB /* Services */,
+				FB30E081C95F56C957B803BF /* Config */,
 			);
 			path = UnsplashPracticum;
+			sourceTree = "<group>";
+		};
+		FB30E081C95F56C957B803BF /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				FB30EA56CFE8CD6C3AFAB038 /* Shimmer.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		FB30E1A2D504E006B4311E23 /* Models */ = {
@@ -495,6 +506,7 @@
 				FB30E8B0004264A241D3C159 /* LikeRequest.swift in Sources */,
 				FB30E882C88EB28B88CF4123 /* LikeModel.swift in Sources */,
 				FB30E77224879089F1103CED /* SingleImageViewModel.swift in Sources */,
+				FB30EFF2253E20106599A78C /* Shimmer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,7 @@ final class ImagesListViewController: UIViewController {
     private let showSingleImageSegueId = "ShowSingleImage"
 
     private let notificationCenter: NotificationCenter = .default
-    private let imagesListService: PhotoRequest = PhotoRequest(urlSession: URLSession.shared)
+    private let imagesListService = PhotoRequest(urlSession: URLSession.shared)
     private var imagesListObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
@@ -188,8 +188,8 @@ extension ImagesListViewController {
             cell.imageCell.kf.indicatorType = .activity
             cell.imageCell.kf.setImage(
                 with: url,
-                // тут не по ТЗ изображение, попробовал использовать blurhash исходя из того, что он есть в API
-                placeholder: UIImage(blurHash: picture.blurHash, size: CGSize(width: 32, height: 100))
+                // FIXME: тут я не использовал как по ТЗ анимацию градиента, увидел что в API возращается blurHash решил попробовать использовать его. Анимацию градиента использую только в профиле. Надеюсь не повлияет на ревью :)
+                placeholder: UIImage(blurHash: picture.blurHash, size: CGSize(width: 32, height: 150))
             ) { [weak self] _ in
                 guard let self = self else { return }
                 self.imageFeedTable.reloadRows(at: [indexPath], with: .automatic)

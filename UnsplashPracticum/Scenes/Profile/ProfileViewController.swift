@@ -26,6 +26,11 @@ final class ProfileViewController: UIViewController {
 
         configureScreen()
 
+        avatarImageView.shimmerAnimatePlaceholder(color: Shimmer.color)
+        usernameLabel.shimmerAnimatePlaceholder(color: Shimmer.color)
+        nicknameLabel.shimmerAnimatePlaceholder(color: Shimmer.color)
+        biographyLabel.shimmerAnimatePlaceholder(color: Shimmer.color)
+
         guard let profile = profileRequest.profile else { return }
         updateProfileDetails(profile: profile)
 
@@ -92,6 +97,10 @@ final class ProfileViewController: UIViewController {
         usernameLabel.text = profile.name
         nicknameLabel.text = profile.loginName
         biographyLabel.text = profile.biography
+
+        usernameLabel.removeShimmerPlaceholder()
+        nicknameLabel.removeShimmerPlaceholder()
+        biographyLabel.removeShimmerPlaceholder()
     }
 
     @objc private func getUserAvatarByNotification(notification: Notification) {
@@ -107,7 +116,13 @@ final class ProfileViewController: UIViewController {
     private func updateUserAvatar(url: URL) {
         // получить изображение пользователя используя Kingfisher
         avatarImageView.kf.indicatorType = .activity
-        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder-userPicture"))
+        avatarImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "placeholder-userPicture")) { [weak self] _ in
+                guard let self else { return }
+                self.avatarImageView.removeShimmerPlaceholder()
+                self.avatarImageView.layer.cornerRadius = self.avatarImageView.layer.frame.height / 2
+        }
     }
 
     // MARK: - UI Configuration
@@ -125,8 +140,7 @@ final class ProfileViewController: UIViewController {
     }
 
     func configureAvatarImageView() {
-        avatarImageView.image = UIImage(named: "avatar")
-        avatarImageView.layer.cornerRadius = 35
+        avatarImageView.layer.cornerRadius = avatarImageView.layer.frame.height / 2
         avatarImageView.clipsToBounds = true
 
         avatarImageView.contentMode = .scaleAspectFill
@@ -136,8 +150,7 @@ final class ProfileViewController: UIViewController {
     }
 
     func configureUsernameLabel() {
-        usernameLabel.text = "Your name"
-
+        usernameLabel.text = "Имя Фамилия"
         usernameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         usernameLabel.textColor = UIColor.whiteBrand
 
@@ -146,8 +159,7 @@ final class ProfileViewController: UIViewController {
     }
 
     func configureNicknameLabel() {
-        nicknameLabel.text = "@placeholder"
-
+        nicknameLabel.text = "@nickname"
         nicknameLabel.font = UIFont.systemFont(ofSize: 13)
         nicknameLabel.textColor = UIColor.grayBrand
 
@@ -156,8 +168,7 @@ final class ProfileViewController: UIViewController {
     }
 
     func configureBiographyLabel() {
-        biographyLabel.text = "Placeholder user biography."
-
+        biographyLabel.text = "Биография пользователя"
         biographyLabel.font = UIFont.systemFont(ofSize: 13)
         biographyLabel.textColor = UIColor.whiteBrand
 
@@ -166,9 +177,8 @@ final class ProfileViewController: UIViewController {
     }
 
     func configureLogoutButton() {
-        logoutButton.setBackgroundImage(UIImage(named: "logout-active"), for: .normal)
-
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.setImage(UIImage(named: "logout-active"), for: .normal)
         view.addSubview(logoutButton)
 
         logoutButton.addTarget(self, action: #selector(tapLogoutButton), for: .touchUpInside)
@@ -188,9 +198,7 @@ final class ProfileViewController: UIViewController {
 
             // user name
             usernameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            usernameLabel.trailingAnchor.constraint(
-                greaterThanOrEqualToSystemSpacingAfter: trailingAnchor,
-                multiplier: 16),
+            usernameLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
 
             // nickname
@@ -202,7 +210,7 @@ final class ProfileViewController: UIViewController {
             biographyLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8),
 
             // logout
-            logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            logoutButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             logoutButton.topAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: -11)
         ])
     }
