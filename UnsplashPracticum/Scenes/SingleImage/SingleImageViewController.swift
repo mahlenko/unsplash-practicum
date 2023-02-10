@@ -26,26 +26,30 @@ final class SingleImageViewController: UIViewController {
     }
 
     private func displayImage() {
-        UIBlockingProgressHUD.show()
+        UIBlockingProgressHUD.show(blocked: false)
         guard let imageURL = URL(string: picture.url) else { return }
 
         imageView.kf.setImage(with: imageURL) { result in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
 
-                UIBlockingProgressHUD.dismiss()
+                UIBlockingProgressHUD.dismiss(unblocked: true)
 
                 switch result {
                 case .success(let imageResult):
                     self.rescaleAndCenterImageInScrollView(contentSize: imageResult.image.size)
                 case .failure(let error):
-                    ErrorToast.show(message: "Не удалось загрузить изображение.", action: .init(
-                        icon: UIImage(systemName: "repeat")
-                    ) { [weak self] in
-                        guard let self = self else { return }
-                        self.displayImage()
-                        Drops.hideCurrent()
-                    })
+                    if !error.isTaskCancelled {
+                        ErrorToast.show(message: "Не удалось загрузить изображение.", action: .init(
+                            icon: UIImage(systemName: "repeat")
+                        ) { [weak self] in
+                            guard let self = self else {
+                                return
+                            }
+                            self.displayImage()
+                            Drops.hideCurrent()
+                        })
+                    }
                 }
             }
         }
