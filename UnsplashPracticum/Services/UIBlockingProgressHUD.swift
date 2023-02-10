@@ -12,13 +12,13 @@ final class UIBlockingProgressHUD {
         UIApplication.shared.windows.first
     }
 
-    static func show() {
-        window?.isUserInteractionEnabled = false
+    static func show(blocked: Bool = true) {
+        window?.isUserInteractionEnabled = !blocked
         ProgressHUD.show()
     }
 
-    static func dismiss() {
-        window?.isUserInteractionEnabled = true
+    static func dismiss(unblocked: Bool = true) {
+        window?.isUserInteractionEnabled = unblocked
         ProgressHUD.dismiss()
     }
 }
