@@ -18,8 +18,8 @@ final class ImagesListViewController: UIViewController {
     private let showSingleImageSegueId = "ShowSingleImage"
 
     private let notificationCenter: NotificationCenter = .default
-    private let imagesListService = PhotoRequest(urlSession: URLSession.shared)
     private var imagesListObserver: NSObjectProtocol?
+    private let photoService = PhotoService.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ final class ImagesListViewController: UIViewController {
                 let indexPath = sender as? IndexPath
             else { return }
 
-            let photo = PhotoRequest.shared.photos[indexPath.row]
+            let photo = photoService.photos[indexPath.row]
             viewController.picture = SingleImageViewModel(
                 url: photo.largeImageURL,
                 size: photo.size)
@@ -70,7 +70,7 @@ final class ImagesListViewController: UIViewController {
 extension ImagesListViewController {
     private func observeImagesListChanges() {
         imagesListObserver = notificationCenter.addObserver(
-            forName: PhotoRequest.didChangeNotification,
+            forName: PhotoService.didChangeNotification,
             object: nil,
             queue: .main
         ) { [weak self] _ in
@@ -86,7 +86,7 @@ extension ImagesListViewController {
 
     private func updateTableViewAnimated() {
         let countRows = imageFeedTable.numberOfRows(inSection: 0)
-        let photoCount = PhotoRequest.shared.photos.count
+        let photoCount = photoService.photos.count
 
         if countRows < photoCount {
             let newIndexPath = (countRows ..< photoCount).map {
@@ -106,7 +106,7 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == PhotoRequest.shared.photos.count {
+        if indexPath.row + 1 == photoService.photos.count {
             fetchPhotos()
         }
     }
@@ -114,7 +114,7 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        PhotoRequest.shared.photos.count
+        photoService.photos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -135,7 +135,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
     func didTapLike(_ cell: ImagesListCell) {
         guard
             let indexPath = imageFeedTable.indexPath(for: cell),
-            var picture = PhotoRequest.shared.photos[indexPath.row] as? PhotoViewModel
+            var picture = photoService.photos[indexPath.row] as? PhotoViewModel
         else { return }
 
         LikeRequest(urlSession: URLSession.shared)
@@ -166,7 +166,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
 
 extension ImagesListViewController {
     func fetchPhotos() {
-        PhotoRequest.shared.fetchPhotoNextPage { result in
+        photoService.fetchPhotoNextPage { result in
             if case .failure(let error) = result {
                 ErrorToast.show(message: error.localizedDescription)
             }
@@ -174,7 +174,7 @@ extension ImagesListViewController {
     }
 
     func updateRow(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let picture = PhotoRequest.shared.photos[indexPath.row] as? PhotoViewModel
+        guard let picture = photoService.photos[indexPath.row] as? PhotoViewModel
         else { return }
 
         cell.dateLabel.text = (picture.createdAt != nil) ? dateFormatter.string(from: picture.createdAt!) : ""

@@ -19,6 +19,7 @@
 		FB30E2DED6F8B1CBCC6BB5AB /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E2C3040B6E9D4AED2193 /* Profile.swift */; };
 		FB30E2E4D4F424291C578BED /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E871A42D905E51A81831 /* ImagesListViewController.swift */; };
 		FB30E390E33CA6BE946810F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB30EA2592EF634A55DD4AE2 /* Main.storyboard */; };
+		FB30E3C7EA3F9A6C2A47229B /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E2F1F8A336D1A8E983E7 /* PhotoService.swift */; };
 		FB30E41DAA33343B3EEF7B32 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EADC69BF744A30439A1F /* WebViewViewControllerDelegate.swift */; };
 		FB30E4620C8CDB799374FEF9 /* ErrorToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E8F2C0AFB595A8A777F0 /* ErrorToast.swift */; };
 		FB30E4897ADF33AF95DF94A5 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E0A312DF9E467136388D /* WebViewViewController.swift */; };
@@ -54,7 +55,6 @@
 		FB30EE1824AFDBB840A9FF37 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EF0F26F9CA23B46B54E5 /* ProfileModel.swift */; };
 		FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */; };
 		FB30EF39C11540C824DB81F2 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E67BA3979AC9BCA31093 /* UIBlockingProgressHUD.swift */; };
-		FB30EFB755B5FA4D650D1082 /* PhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30ECDA646AA35E0FA6B34D /* PhotoRequest.swift */; };
 		FB30EFF037C4506D032C23FA /* ShimmerPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E5C0921FB81D92FCCAC2 /* ShimmerPlaceholder.swift */; };
 		FB30EFF2253E20106599A78C /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA56CFE8CD6C3AFAB038 /* Shimmer.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +82,7 @@
 		FB30E20E79216F758E8ACBA3 /* SingleImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewModel.swift; sourceTree = "<group>"; };
 		FB30E29CD5466C25C9E64619 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		FB30E2C3040B6E9D4AED2193 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		FB30E2F1F8A336D1A8E983E7 /* PhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		FB30E30AE730560D49931B8B /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		FB30E372D54D03BC8C74EFD7 /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		FB30E487133F03C58916152F /* AuthViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		FB30EB6B7A3394650EBE299F /* OAuth2TokenStorageUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageUserDefault.swift; sourceTree = "<group>"; };
 		FB30EC349FDFDE19BF50F27C /* PhotoRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequestTest.swift; sourceTree = "<group>"; };
 		FB30ECC15C0E59CC85FA3AC9 /* UserProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
-		FB30ECDA646AA35E0FA6B34D /* PhotoRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRequest.swift; sourceTree = "<group>"; };
 		FB30ECED0743F8FD7D275920 /* OAuth2Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
 		FB30EE2D7E3044192AC006A6 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		FB30EE81C3942BFB38AB7306 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
@@ -205,7 +205,6 @@
 		FB30E22DAF6CD0070C95704D /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				FB30ECDA646AA35E0FA6B34D /* PhotoRequest.swift */,
 				FB30EAAD46E4BA8B0A7540C2 /* LikeRequest.swift */,
 			);
 			path = Request;
@@ -323,6 +322,7 @@
 				FB30E22DAF6CD0070C95704D /* Request */,
 				FB30E4C18859DA377C1D5E8C /* Model */,
 				FB30EE81C3942BFB38AB7306 /* ImagesListCellDelegate.swift */,
+				FB30EC346A2904FB755D42D5 /* Service */,
 			);
 			path = ImageList;
 			sourceTree = "<group>";
@@ -342,6 +342,14 @@
 				FB30EC349FDFDE19BF50F27C /* PhotoRequestTest.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		FB30EC346A2904FB755D42D5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				FB30E2F1F8A336D1A8E983E7 /* PhotoService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		FB30ECF30FC7971A66CCE6B6 /* Models */ = {
@@ -507,7 +515,6 @@
 				FB30EA0BBB6BAEBCDBBCBB57 /* TabBarController.swift in Sources */,
 				FB30E223DBD54194701E239E /* SplashViewController.swift in Sources */,
 				FB30E9C31F6D23F455F31270 /* SplashView.swift in Sources */,
-				FB30EFB755B5FA4D650D1082 /* PhotoRequest.swift in Sources */,
 				FB30E58BCEAE8EAF915F8AA2 /* PhotoModel.swift in Sources */,
 				FB30E71871B750A31E03CBF0 /* PhotoURL.swift in Sources */,
 				FB30E8B3A13ACE23B63E8169 /* PhotoLink.swift in Sources */,
@@ -519,6 +526,7 @@
 				FB30E77224879089F1103CED /* SingleImageViewModel.swift in Sources */,
 				FB30EFF2253E20106599A78C /* Shimmer.swift in Sources */,
 				FB30EFF037C4506D032C23FA /* ShimmerPlaceholder.swift in Sources */,
+				FB30E3C7EA3F9A6C2A47229B /* PhotoService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

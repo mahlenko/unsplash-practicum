@@ -5,8 +5,8 @@
 
 import Foundation
 
-class PhotoRequest: NetworkService {
-    static let shared = PhotoRequest(urlSession: URLSession.shared)
+class PhotoService: NetworkService {
+    static let shared = PhotoService(urlSession: URLSession.shared)
     private (set) var photos: [PhotoViewModel] = []
     private var currentPage: Int?
 
@@ -48,7 +48,7 @@ class PhotoRequest: NetworkService {
                         }
 
                         // отправляем уведомление
-                        NotificationCenter.default.post(name: PhotoRequest.didChangeNotification, object: self)
+                        NotificationCenter.default.post(name: PhotoService.didChangeNotification, object: self)
                         completion(.success(photos))
                     } catch {
                         completion(.failure(error))
