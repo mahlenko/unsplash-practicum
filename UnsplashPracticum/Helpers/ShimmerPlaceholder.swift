@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 enum ShimmerPlaceholder {
-    static func show(view: UIView, color: UIColor) {
+    static func show(view: UIView, color: UIColor = Shimmer.color) {
         // не создаем повторные placeholders
         var cancel = false
         view.subviews.forEach { view in

@@ -26,10 +26,10 @@ final class ProfileViewController: UIViewController {
 
         configureScreen()
 
-        ShimmerPlaceholder.show(view: avatarImageView, color: Shimmer.color)
+        ShimmerPlaceholder.show(view: avatarImageView)
 
         [usernameLabel, nicknameLabel, biographyLabel].forEach { label in
-            ShimmerPlaceholder.show(view: label, color: Shimmer.color)
+            ShimmerPlaceholder.show(view: label)
             label.text = ""
         }
 

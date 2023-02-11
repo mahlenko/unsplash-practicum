@@ -4,7 +4,6 @@
 //
 
 import UIKit
-import Kingfisher
 import Drops
 
 final class SingleImageViewController: UIViewController {
