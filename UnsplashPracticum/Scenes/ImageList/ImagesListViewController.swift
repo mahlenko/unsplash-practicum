@@ -20,6 +20,12 @@ final class ImagesListViewController: UIViewController {
     private let notificationCenter: NotificationCenter = .default
     private var imagesListObserver: NSObjectProtocol?
     private let photoService = PhotoService.shared
+    private let dateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,13 +64,6 @@ final class ImagesListViewController: UIViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
-
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
 }
 
 extension ImagesListViewController {
@@ -177,8 +176,6 @@ extension ImagesListViewController {
         guard let picture = photoService.photos[indexPath.row] as? PhotoViewModel
         else { return }
 
-        cell.dateLabel.text = (picture.createdAt != nil) ? dateFormatter.string(from: picture.createdAt!) : ""
-
         if let url = URL(string: picture.thumbImageURL) {
             let cache = ImageCache.default
             cache.memoryStorage.config.expiration = .seconds(60 * 20)
@@ -193,6 +190,8 @@ extension ImagesListViewController {
                 self.imageFeedTable.reloadRows(at: [indexPath], with: .automatic)
             }
         }
+
+        cell.dateLabel.text = dateFormatter().string(from: picture.createdAt!)
 
         if picture.isLiked {
             like(cell.likeButton)
