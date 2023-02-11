@@ -55,6 +55,7 @@
 		FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */; };
 		FB30EF39C11540C824DB81F2 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E67BA3979AC9BCA31093 /* UIBlockingProgressHUD.swift */; };
 		FB30EFB755B5FA4D650D1082 /* PhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30ECDA646AA35E0FA6B34D /* PhotoRequest.swift */; };
+		FB30EFF037C4506D032C23FA /* ShimmerPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E5C0921FB81D92FCCAC2 /* ShimmerPlaceholder.swift */; };
 		FB30EFF2253E20106599A78C /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA56CFE8CD6C3AFAB038 /* Shimmer.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		FB30E30AE730560D49931B8B /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		FB30E372D54D03BC8C74EFD7 /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		FB30E487133F03C58916152F /* AuthViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewControllerDelegate.swift; sourceTree = "<group>"; };
+		FB30E5C0921FB81D92FCCAC2 /* ShimmerPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmerPlaceholder.swift; sourceTree = "<group>"; };
 		FB30E64944ED3490BCD4BFA0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB30E67BA3979AC9BCA31093 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		FB30E6E7F44ABC871294218A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +181,7 @@
 				FB30E4BDA57520987BBAF24E /* Scenes */,
 				FB30E6A463A1FDD4AC0E13EB /* Services */,
 				FB30E081C95F56C957B803BF /* Config */,
+				FB30E5C06652C03BD356A44E /* Helpers */,
 			);
 			path = UnsplashPracticum;
 			sourceTree = "<group>";
@@ -242,6 +245,14 @@
 				FB30E1F9C157059888C68D85 /* LikeModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FB30E5C06652C03BD356A44E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FB30E5C0921FB81D92FCCAC2 /* ShimmerPlaceholder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		FB30E5CDF11EDCB4BBC8ED33 /* Splash */ = {
@@ -507,6 +518,7 @@
 				FB30E882C88EB28B88CF4123 /* LikeModel.swift in Sources */,
 				FB30E77224879089F1103CED /* SingleImageViewModel.swift in Sources */,
 				FB30EFF2253E20106599A78C /* Shimmer.swift in Sources */,
+				FB30EFF037C4506D032C23FA /* ShimmerPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

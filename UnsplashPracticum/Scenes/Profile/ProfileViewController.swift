@@ -26,10 +26,12 @@ final class ProfileViewController: UIViewController {
 
         configureScreen()
 
-        avatarImageView.shimmerAnimatePlaceholder(color: Shimmer.color)
-        usernameLabel.shimmerAnimatePlaceholder(color: Shimmer.color)
-        nicknameLabel.shimmerAnimatePlaceholder(color: Shimmer.color)
-        biographyLabel.shimmerAnimatePlaceholder(color: Shimmer.color)
+        ShimmerPlaceholder.show(view: avatarImageView, color: Shimmer.color)
+
+        [usernameLabel, nicknameLabel, biographyLabel].forEach { label in
+            ShimmerPlaceholder.show(view: label, color: Shimmer.color)
+            label.text = ""
+        }
 
         guard let profile = profileRequest.profile else { return }
         updateProfileDetails(profile: profile)
@@ -98,9 +100,9 @@ final class ProfileViewController: UIViewController {
         nicknameLabel.text = profile.loginName
         biographyLabel.text = profile.biography
 
-        usernameLabel.removeShimmerPlaceholder()
-        nicknameLabel.removeShimmerPlaceholder()
-        biographyLabel.removeShimmerPlaceholder()
+        [usernameLabel, nicknameLabel, biographyLabel].forEach { label in
+            ShimmerPlaceholder.hide(view: label)
+        }
     }
 
     @objc private func getUserAvatarByNotification(notification: Notification) {
@@ -120,7 +122,7 @@ final class ProfileViewController: UIViewController {
             with: url,
             placeholder: UIImage(named: "placeholder-userPicture")) { [weak self] _ in
                 guard let self else { return }
-                self.avatarImageView.removeShimmerPlaceholder()
+                ShimmerPlaceholder.hide(view: self.avatarImageView)
                 self.avatarImageView.layer.cornerRadius = self.avatarImageView.layer.frame.height / 2
         }
     }

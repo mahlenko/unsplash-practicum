@@ -167,9 +167,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
 extension ImagesListViewController {
     func fetchPhotos() {
         PhotoRequest.shared.fetchPhotoNextPage { result in
-            switch result {
-            case .success: break
-            case .failure(let error):
+            if case .failure(let error) = result {
                 ErrorToast.show(message: error.localizedDescription)
             }
         }
