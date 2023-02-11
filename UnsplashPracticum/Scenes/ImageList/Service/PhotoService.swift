@@ -36,7 +36,9 @@ class PhotoService: NetworkService {
                     }
                     do {
                         // декодируем результат и добавим фото в массив
-                        let photos = try JSONDecoder().decode([PhotoModel].self, from: data)
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let photos = try decoder.decode([PhotoModel].self, from: data)
 
                         photos.forEach { model in
                             self.photos.append(PhotoViewModel.convert(model: model))

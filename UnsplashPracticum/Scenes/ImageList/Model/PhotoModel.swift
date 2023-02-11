@@ -15,16 +15,4 @@ struct PhotoModel: Decodable {
     let likedByUser: Bool
     let urls: PhotoURL
     let links: PhotoLink
-
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case createdAt = "created_at"
-        case width
-        case height
-        case description
-        case blurHash = "blur_hash"
-        case likedByUser = "liked_by_user"
-        case urls
-        case links
-    }
 }
