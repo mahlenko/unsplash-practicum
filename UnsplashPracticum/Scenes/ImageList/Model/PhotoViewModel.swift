@@ -16,11 +16,11 @@ struct PhotoViewModel {
     let downloadURL: String
     var isLiked: Bool
 
-    static func convert(model: PhotoModel) -> PhotoViewModel {
+    static func convert(model: PhotoModel, dateFormatter: ISO8601DateFormatter) -> PhotoViewModel {
         PhotoViewModel(
             id: model.id,
             size: CGSize(width: model.width, height: model.height),
-            createdAt: DateFormatter().date(from: model.createdAt),
+            createdAt: dateFormatter.date(from: model.createdAt) ?? Date(),
             welcomeDescription: model.description,
             blurHash: model.blurHash,
             thumbImageURL: model.urls.thumb,

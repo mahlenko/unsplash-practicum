@@ -19,8 +19,9 @@ class LikeRequest: NetworkService {
                 completion(.failure(error))
             case .success(let data):
                 do {
+                    let formatter = ISO8601DateFormatter()
                     let model = try JSONDecoder().decode(LikeModel.self, from: data)
-                    completion(.success(PhotoViewModel.convert(model: model.photo)))
+                    completion(.success(PhotoViewModel.convert(model: model.photo, dateFormatter: formatter)))
                 } catch {
                     completion(.failure(error))
                 }

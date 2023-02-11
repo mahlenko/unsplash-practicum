@@ -41,7 +41,9 @@ class PhotoService: NetworkService {
                         let photos = try decoder.decode([PhotoModel].self, from: data)
 
                         photos.forEach { model in
-                            self.photos.append(PhotoViewModel.convert(model: model))
+                            self.photos.append(
+                                PhotoViewModel.convert(model: model, dateFormatter: ISO8601DateFormatter())
+                            )
                         }
 
                         // сохраним номер последней полученной страницы
