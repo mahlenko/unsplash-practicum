@@ -29,10 +29,11 @@ class NetworkService {
     var task: URLSessionTask?
     var lastUrlComponents: URLComponents?
 
-    private let urlSession: URLSession
+    private let session: URLSession
+    static let shared = NetworkService()
 
-    init(urlSession: URLSession?) {
-        self.urlSession = urlSession ?? URLSession.shared
+    init(urlSession: URLSession = URLSession.shared) {
+        session = urlSession
     }
 
     internal func fetch(method: FetchMethod, urlComponent: URLComponents, headers: [(key: String, value: String)] = [], completion: @escaping (Result<Data, Error>) -> Void) {
@@ -62,7 +63,7 @@ class NetworkService {
                 return
             }
 
-        let task = urlSession.dataTask(with: request) { data, response, error in
+        let task = session.dataTask(with: request) { data, response, error in
             self.task = nil
             self.lastUrlComponents = nil
 

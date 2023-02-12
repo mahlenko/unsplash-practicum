@@ -5,8 +5,9 @@
 
 import Foundation
 
-class UserProfileRequest: NetworkService {
-    static let shared = UserProfileRequest(urlSession: URLSession.shared)
+class UserProfileRequest {
+    static let shared = UserProfileRequest()
+    private let network = NetworkService.shared
 
     private (set) var profile: UserProfile?
 
@@ -14,7 +15,7 @@ class UserProfileRequest: NetworkService {
 
     func fetchUserProfile(username: String, token: String, completion: @escaping (Result<UserProfileModel, Error>) -> Void) {
         let headers = [(key: "Authorization", value: "Bearer \(token)")]
-        fetch(method: .GET, urlComponent: fetchUrlComponent(username: username), headers: headers) { result in
+        network.fetch(method: .GET, urlComponent: fetchUrlComponent(username: username), headers: headers) { result in
             switch result {
             case .success(let data):
                 do {

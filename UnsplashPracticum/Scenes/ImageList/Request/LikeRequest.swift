@@ -5,26 +5,22 @@
 
 import Foundation
 
-class LikeRequest: NetworkService {
-    func sendChangeLike(id: String, currentStatus: Bool, completion: @escaping (Result<PhotoViewModel, Error>) -> Void) {
+class LikeRequest {
+    private let network = NetworkService.shared
+
+    func sendChangeLike(id: String, currentStatus: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {
         guard let token = OAuth2TokenStorage().userToken else { return }
 
-        fetch(
+        network.fetch(
             method: currentStatus ? .DELETE : .POST,
             urlComponent: URLComponentRequest(for: id),
             headers: [(key: "Authorization", value: "Bearer \(token)")]
         ) { result in
             switch result {
+            case .success:
+                completion(.success(!currentStatus))
             case .failure(let error):
                 completion(.failure(error))
-            case .success(let data):
-                do {
-                    let formatter = ISO8601DateFormatter()
-                    let model = try JSONDecoder().decode(LikeModel.self, from: data)
-                    completion(.success(PhotoViewModel.convert(model: model.photo, dateFormatter: formatter)))
-                } catch {
-                    completion(.failure(error))
-                }
             }
         }
     }

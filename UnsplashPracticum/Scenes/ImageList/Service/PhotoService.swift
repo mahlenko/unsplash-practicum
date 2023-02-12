@@ -5,9 +5,12 @@
 
 import Foundation
 
-class PhotoService: NetworkService {
-    static let shared = PhotoService(urlSession: URLSession.shared)
-    private (set) var photos: [PhotoViewModel] = []
+class PhotoService {
+    static let shared = PhotoService()
+    private let network = NetworkService.shared
+
+    var photos: [PhotoViewModel] = []
+    private let formatter = ISO8601DateFormatter()
     private var currentPage: Int?
 
     static let didChangeNotification = Notification.Name(rawValue: "PhotoListRequestDidChange")
@@ -22,7 +25,7 @@ class PhotoService: NetworkService {
 
         let headers = [(key: "Authorization", value: "Bearer \(token)")]
 
-        fetch(
+        network.fetch(
             method: .GET,
             urlComponent: urlComponent,
             headers: headers) { [weak self] result in
@@ -42,7 +45,7 @@ class PhotoService: NetworkService {
 
                         photos.forEach { model in
                             self.photos.append(
-                                PhotoViewModel.convert(model: model, dateFormatter: ISO8601DateFormatter())
+                                PhotoViewModel.convert(model: model, dateFormatter: self.formatter)
                             )
                         }
 

@@ -5,15 +5,16 @@
 
 import Foundation
 
-class ProfileRequest: NetworkService {
-    static let shared = ProfileRequest(urlSession: URLSession.shared)
+class ProfileRequest {
+    static var shared = ProfileRequest()
+    private let network = NetworkService.shared
 
     private (set) var profile: Profile?
 
     func fetchUserProfile(token: String, completion: @escaping (Result<ProfileModel, Error>) -> Void) {
         let headers = [(key: "Authorization", value: "Bearer \(token)")]
 
-        fetch(method: .GET, urlComponent: fetchUrlComponent(), headers: headers) { [weak self] result in
+        network.fetch(method: .GET, urlComponent: fetchUrlComponent(), headers: headers) { [weak self] result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))

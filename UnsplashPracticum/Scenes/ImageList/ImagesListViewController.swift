@@ -19,7 +19,7 @@ final class ImagesListViewController: UIViewController {
 
     private let notificationCenter: NotificationCenter = .default
     private var imagesListObserver: NSObjectProtocol?
-    private let photoService = PhotoService.shared
+    private var photoService = PhotoService.shared
     private let dateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -57,9 +57,7 @@ final class ImagesListViewController: UIViewController {
             else { return }
 
             let photo = photoService.photos[indexPath.row]
-            viewController.picture = SingleImageViewModel(
-                url: photo.largeImageURL,
-                size: photo.size)
+            viewController.picture = SingleImageViewModel(url: photo.largeImageURL, size: photo.size)
         default:
             super.prepare(for: segue, sender: sender)
         }
@@ -132,34 +130,24 @@ extension ImagesListViewController: UITableViewDataSource {
 
 extension ImagesListViewController: ImagesListCellDelegate {
     func didTapLike(_ cell: ImagesListCell) {
-        guard
-            let indexPath = imageFeedTable.indexPath(for: cell),
-            var picture = photoService.photos[indexPath.row] as? PhotoViewModel
-        else { return }
+        guard let indexPath = imageFeedTable.indexPath(for: cell) else { return }
 
-        LikeRequest(urlSession: URLSession.shared)
-            .sendChangeLike(
-                id: picture.id,
-                currentStatus: picture.isLiked
-            ) { [weak self] result in
-                guard let self else { return }
+        let picture = photoService.photos[indexPath.row]
+        LikeRequest().sendChangeLike(id: picture.id, currentStatus: picture.isLiked) { [weak self] result in
+            guard let self else { return }
 
-                switch result {
-                case .success(let data):
-                    picture.updateLike(like: data.isLiked)
-                    self.setImageLikeButton(picture: data, cell: cell)
-                case .failure(let error):
-                    ErrorToast.show(message: error.localizedDescription)
-                }
+            switch result {
+            case .success(let liked):
+                self.photoService.photos[indexPath.row].updateLike(like: liked)
+                self.setImageLikeButton(selected: liked, cell: cell)
+            case .failure(let error):
+                ErrorToast.show(message: error.localizedDescription)
             }
+        }
     }
 
-    func setImageLikeButton(picture: PhotoViewModel, cell: ImagesListCell) {
-        if picture.isLiked {
-            cell.likeButton.imageView?.image = UIImage(named: "heart-active")
-        } else {
-            cell.likeButton.imageView?.image = UIImage(named: "heart-default")
-        }
+    func setImageLikeButton(selected: Bool, cell: ImagesListCell) {
+        selected ? like(cell.likeButton) : dislike(cell.likeButton)
     }
 }
 
@@ -173,8 +161,7 @@ extension ImagesListViewController {
     }
 
     func updateRow(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let picture = photoService.photos[indexPath.row] as? PhotoViewModel
-        else { return }
+        let picture = photoService.photos[indexPath.row]
 
         if let url = URL(string: picture.thumbImageURL) {
             let cache = ImageCache.default
@@ -183,8 +170,10 @@ extension ImagesListViewController {
             cell.imageCell.kf.indicatorType = .activity
             cell.imageCell.kf.setImage(
                 with: url,
-                // FIXME: тут я не использовал как по ТЗ анимацию градиента, увидел что в API возращается blurHash решил попробовать использовать его. Анимацию градиента использую только в профиле. Надеюсь не повлияет на ревью :)
-                placeholder: UIImage(blurHash: picture.blurHash, size: CGSize(width: 32, height: 150))
+                placeholder: UIImage(
+                    blurHash: picture.blurHash,
+                    size: CGSize(width: 32, height: 150)
+                )
             ) { [weak self] _ in
                 guard let self = self else { return }
                 self.imageFeedTable.reloadRows(at: [indexPath], with: .automatic)
@@ -193,18 +182,14 @@ extension ImagesListViewController {
 
         cell.dateLabel.text = dateFormatter().string(from: picture.createdAt!)
 
-        if picture.isLiked {
-            like(cell.likeButton)
-        } else {
-            dislike(cell.likeButton)
-        }
+        picture.isLiked ? like(cell.likeButton) : dislike(cell.likeButton)
     }
 
     func like(_ button: UIButton) {
-        button.imageView?.image = UIImage(named: "heart-active")
+        button.setImage(UIImage(named: "heart-active"), for: .normal)
     }
 
     func dislike(_ button: UIButton) {
-        button.imageView?.image = UIImage(named: "heart-default")
+        button.setImage(UIImage(named: "heart-default"), for: .normal)
     }
 }
