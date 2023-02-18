@@ -44,7 +44,7 @@ class AuthHelper: AuthHelperProtocol {
         return urlComponent
     }
 
-    private func authUrl() -> URL {
+    func authUrl() -> URL {
         guard var urlComponent = URLComponents(string: configuration.authURLString + "/authorize") else {
             fatalError("Error configuration by auth.")
         }
