@@ -29,11 +29,14 @@ class NetworkService {
     var task: URLSessionTask?
     var lastUrlComponents: URLComponents?
 
+    let configuration: UnsplashApiConfiguration
+
     private let session: URLSession
     static let shared = NetworkService()
 
-    init(urlSession: URLSession = URLSession.shared) {
+    init(urlSession: URLSession = URLSession.shared, configuration: UnsplashApiConfiguration = .standard) {
         session = urlSession
+        self.configuration = configuration
     }
 
     internal func fetch(method: FetchMethod, urlComponent: URLComponents, headers: [(key: String, value: String)] = [], completion: @escaping (Result<Data, Error>) -> Void) {

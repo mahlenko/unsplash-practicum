@@ -6,6 +6,11 @@
 import WebKit
 import UIKit
 
+protocol WebViewViewControllerDelegate: AnyObject {
+    func webViewViewController(_ webViewVC: WebViewViewController, didAuthenticateWithCode code: String)
+    func webViewViewControllerDidCancel(_ webViewVC: WebViewViewController)
+}
+
 public protocol WebViewViewControllerProtocol {
     var presenter: WebViewPresenterProtocol? { get set }
     func load(request: URLRequest)

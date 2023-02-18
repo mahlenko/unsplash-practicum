@@ -69,7 +69,7 @@ class PhotoService {
 
     private func getUrlComponent() -> URLComponents {
         guard
-            let url = URL(string: Constant.unsplashBaseURL.rawValue + "/photos"),
+            let url = URL(string: network.configuration.baseUrl + "/photos"),
             var component = URLComponents(url: url, resolvingAgainstBaseURL: false)
         else {
             fatalError("Oops, something went wrong. Failed to create a link to get a photos.")

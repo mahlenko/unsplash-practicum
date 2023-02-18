@@ -21,18 +21,18 @@
 		FB30E2E4D4F424291C578BED /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E871A42D905E51A81831 /* ImagesListViewController.swift */; };
 		FB30E390E33CA6BE946810F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB30EA2592EF634A55DD4AE2 /* Main.storyboard */; };
 		FB30E3C7EA3F9A6C2A47229B /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E2F1F8A336D1A8E983E7 /* PhotoService.swift */; };
-		FB30E41DAA33343B3EEF7B32 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EADC69BF744A30439A1F /* WebViewViewControllerDelegate.swift */; };
 		FB30E4620C8CDB799374FEF9 /* ErrorToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E8F2C0AFB595A8A777F0 /* ErrorToast.swift */; };
 		FB30E4897ADF33AF95DF94A5 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E0A312DF9E467136388D /* WebViewViewController.swift */; };
 		FB30E4D539F1E90F97F08A8F /* BlurHashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E9549D737724DBD7C77A /* BlurHashDecode.swift */; };
-		FB30E4FE9A53AFD50CB6ABD2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E29CD5466C25C9E64619 /* Constant.swift */; };
 		FB30E56A7D7BA371E69EC1DA /* PhotoRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EC349FDFDE19BF50F27C /* PhotoRequestTest.swift */; };
 		FB30E58BCEAE8EAF915F8AA2 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EFD340E7ACD90E4F0C00 /* PhotoModel.swift */; };
+		FB30E58BDB290E15887A8D50 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E14B1DD9019810BC8C5D /* AuthConfiguration.swift */; };
 		FB30E638483C0E53AAD0F514 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E86820866119BA2AEA47 /* UIView.swift */; };
 		FB30E6EDFD90B12423D4751D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E86F1902CE5F99973AE1 /* NetworkService.swift */; };
 		FB30E71871B750A31E03CBF0 /* PhotoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E00AF35511A54DE009D0 /* PhotoURL.swift */; };
 		FB30E77224879089F1103CED /* SingleImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E20E79216F758E8ACBA3 /* SingleImageViewModel.swift */; };
 		FB30E77C13F5BEBA7996B6A7 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E18AB5A30FFE4C66F927 /* PhotoViewModel.swift */; };
+		FB30E7D8CDD80B1FF31DD550 /* UnsplashApiConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E2C0AF5684A2FC554FE0 /* UnsplashApiConfiguration.swift */; };
 		FB30E81510F258E754D78F50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA823E4130B726CA4AE0 /* ProfileViewController.swift */; };
 		FB30E882C88EB28B88CF4123 /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E1F9C157059888C68D85 /* LikeModel.swift */; };
 		FB30E8B0004264A241D3C159 /* LikeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EAAD46E4BA8B0A7540C2 /* LikeRequest.swift */; };
@@ -42,6 +42,7 @@
 		FB30E9BDD2CA210FEFEC679E /* OAuth2TokenStorageUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EB6B7A3394650EBE299F /* OAuth2TokenStorageUserDefault.swift */; };
 		FB30E9C31F6D23F455F31270 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E73367A7E8274F48D3D4 /* SplashView.swift */; };
 		FB30EA0BBB6BAEBCDBBCBB57 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E9E9F3065D123571D954 /* TabBarController.swift */; };
+		FB30EA59C169B4EB9309D32B /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E2DB041CD7C221D4D518 /* AuthHelper.swift */; };
 		FB30EA83C2AB768B3C30493E /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E8B74564197D5DDA530C /* UserProfile.swift */; };
 		FB30EBB2EE4E9C6BF729A3B0 /* ProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EF6652C7357FAEE92D3E /* ProfileRequest.swift */; };
 		FB30EC43B9180367224F9FB9 /* UserProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA7C800B0B4321848BCC /* UserProfileRequest.swift */; };
@@ -51,9 +52,9 @@
 		FB30ECC6203C570472BFB5B2 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E7AB6927B011E231E09B /* OAuth2Service.swift */; };
 		FB30ECD2D0B1B918A6F9EF76 /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30ECED0743F8FD7D275920 /* OAuth2Token.swift */; };
 		FB30ECEF208EDF1D17E50B9D /* ProfileImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E8C30A709E132460522A /* ProfileImagesModel.swift */; };
-		FB30ED2D8D593B61C496BD73 /* AuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E487133F03C58916152F /* AuthViewControllerDelegate.swift */; };
 		FB30ED52B6C1DDD89BEE1B8D /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30ECC15C0E59CC85FA3AC9 /* UserProfileModel.swift */; };
 		FB30EE1824AFDBB840A9FF37 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EF0F26F9CA23B46B54E5 /* ProfileModel.swift */; };
+		FB30EE18A08479ED7F84DE18 /* AuthHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E465345FC2DD3A82CC3C /* AuthHelperProtocol.swift */; };
 		FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */; };
 		FB30EF39C11540C824DB81F2 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E67BA3979AC9BCA31093 /* UIBlockingProgressHUD.swift */; };
 		FB30EFF037C4506D032C23FA /* ShimmerPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E5C0921FB81D92FCCAC2 /* ShimmerPlaceholder.swift */; };
@@ -78,15 +79,17 @@
 		8BCD68C728FDB59A006D1BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB30E00AF35511A54DE009D0 /* PhotoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoURL.swift; sourceTree = "<group>"; };
 		FB30E0A312DF9E467136388D /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		FB30E14B1DD9019810BC8C5D /* AuthConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		FB30E18AB5A30FFE4C66F927 /* PhotoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		FB30E1F9C157059888C68D85 /* LikeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
 		FB30E20E79216F758E8ACBA3 /* SingleImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewModel.swift; sourceTree = "<group>"; };
-		FB30E29CD5466C25C9E64619 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		FB30E2C0AF5684A2FC554FE0 /* UnsplashApiConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashApiConfiguration.swift; sourceTree = "<group>"; };
 		FB30E2C3040B6E9D4AED2193 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		FB30E2DB041CD7C221D4D518 /* AuthHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		FB30E2F1F8A336D1A8E983E7 /* PhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		FB30E30AE730560D49931B8B /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		FB30E372D54D03BC8C74EFD7 /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
-		FB30E487133F03C58916152F /* AuthViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewControllerDelegate.swift; sourceTree = "<group>"; };
+		FB30E465345FC2DD3A82CC3C /* AuthHelperProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthHelperProtocol.swift; sourceTree = "<group>"; };
 		FB30E5C0921FB81D92FCCAC2 /* ShimmerPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmerPlaceholder.swift; sourceTree = "<group>"; };
 		FB30E64944ED3490BCD4BFA0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB30E67BA3979AC9BCA31093 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
@@ -109,7 +112,6 @@
 		FB30EA823E4130B726CA4AE0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FB30EAAA42F7A7AD149E2A3B /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		FB30EAAD46E4BA8B0A7540C2 /* LikeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeRequest.swift; sourceTree = "<group>"; };
-		FB30EADC69BF744A30439A1F /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
 		FB30EB6B7A3394650EBE299F /* OAuth2TokenStorageUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageUserDefault.swift; sourceTree = "<group>"; };
 		FB30EC349FDFDE19BF50F27C /* PhotoRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequestTest.swift; sourceTree = "<group>"; };
 		FB30ECC15C0E59CC85FA3AC9 /* UserProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
@@ -150,7 +152,6 @@
 			children = (
 				8BCD68C228FDB59A006D1BFC /* Assets.xcassets */,
 				8BCD68C728FDB59A006D1BFC /* Info.plist */,
-				FB30E29CD5466C25C9E64619 /* Constant.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -192,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				FB30EA56CFE8CD6C3AFAB038 /* Shimmer.swift */,
+				FB30E14B1DD9019810BC8C5D /* AuthConfiguration.swift */,
+				FB30E2C0AF5684A2FC554FE0 /* UnsplashApiConfiguration.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -284,6 +287,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		FB30E75B6151BC45BF5DE760 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FB30E2DB041CD7C221D4D518 /* AuthHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		FB30E7D2417B7937FE827491 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,11 +319,11 @@
 			children = (
 				FB30EA2EF40AC15F726CBD5D /* AuthViewController.swift */,
 				FB30E0A312DF9E467136388D /* WebViewViewController.swift */,
-				FB30EADC69BF744A30439A1F /* WebViewViewControllerDelegate.swift */,
 				FB30E1A2D504E006B4311E23 /* Models */,
 				FB30E395E55F4A47866C235B /* Services */,
-				FB30E487133F03C58916152F /* AuthViewControllerDelegate.swift */,
 				FB30ED6439007C56085FEE83 /* WebViewPresenter.swift */,
+				FB30E465345FC2DD3A82CC3C /* AuthHelperProtocol.swift */,
+				FB30E75B6151BC45BF5DE760 /* Helpers */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -496,10 +507,8 @@
 				FB30ECA48853341513752C4E /* ImagesListCell.swift in Sources */,
 				FB30E2E4D4F424291C578BED /* ImagesListViewController.swift in Sources */,
 				FB30E81510F258E754D78F50 /* ProfileViewController.swift in Sources */,
-				FB30E4FE9A53AFD50CB6ABD2 /* Constant.swift in Sources */,
 				FB30EE2574FAF1D254E409C6 /* AuthViewController.swift in Sources */,
 				FB30E4897ADF33AF95DF94A5 /* WebViewViewController.swift in Sources */,
-				FB30E41DAA33343B3EEF7B32 /* WebViewViewControllerDelegate.swift in Sources */,
 				FB30E92B0BFE64D1990D6846 /* OAuthTokenResponseBody.swift in Sources */,
 				FB30ECC6203C570472BFB5B2 /* OAuth2Service.swift in Sources */,
 				FB30E6EDFD90B12423D4751D /* NetworkService.swift in Sources */,
@@ -507,7 +516,6 @@
 				FB30ECD2D0B1B918A6F9EF76 /* OAuth2Token.swift in Sources */,
 				FB30EBB2EE4E9C6BF729A3B0 /* ProfileRequest.swift in Sources */,
 				FB30EE1824AFDBB840A9FF37 /* ProfileModel.swift in Sources */,
-				FB30ED2D8D593B61C496BD73 /* AuthViewControllerDelegate.swift in Sources */,
 				FB30EF39C11540C824DB81F2 /* UIBlockingProgressHUD.swift in Sources */,
 				FB30E2DED6F8B1CBCC6BB5AB /* Profile.swift in Sources */,
 				FB30EC43B9180367224F9FB9 /* UserProfileRequest.swift in Sources */,
@@ -531,6 +539,10 @@
 				FB30EFF037C4506D032C23FA /* ShimmerPlaceholder.swift in Sources */,
 				FB30E3C7EA3F9A6C2A47229B /* PhotoService.swift in Sources */,
 				FB30E0FC90C702E8BEBB3189 /* WebViewPresenter.swift in Sources */,
+				FB30EE18A08479ED7F84DE18 /* AuthHelperProtocol.swift in Sources */,
+				FB30E58BDB290E15887A8D50 /* AuthConfiguration.swift in Sources */,
+				FB30EA59C169B4EB9309D32B /* AuthHelper.swift in Sources */,
+				FB30E7D8CDD80B1FF31DD550 /* UnsplashApiConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

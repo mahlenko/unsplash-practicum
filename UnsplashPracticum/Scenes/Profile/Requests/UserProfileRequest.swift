@@ -43,7 +43,7 @@ class UserProfileRequest {
 
     private func fetchUrlComponent(username: String) -> URLComponents {
         guard
-            let url = URL(string: "\(Constant.unsplashBaseURL.rawValue)/users/\(username)"),
+            let url = URL(string: network.configuration.baseUrl + "/users/\(username)"),
             let urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: false)
         else {
             fatalError("Oops, something went wrong. Failed to create a link to get a user profile..")

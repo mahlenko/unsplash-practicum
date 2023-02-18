@@ -27,7 +27,7 @@ class LikeRequest {
 
     private func URLComponentRequest(for id: String) -> URLComponents {
         guard
-            let url = URL(string: Constant.unsplashBaseURL.rawValue + "/photos/\(id)/like"),
+            let url = URL(string: network.configuration.baseUrl + "/photos/\(id)/like"),
             let component = URLComponents(url: url, resolvingAgainstBaseURL: false)
         else {
             fatalError("Oops, something went wrong. Failed to create a link for like photo.")
