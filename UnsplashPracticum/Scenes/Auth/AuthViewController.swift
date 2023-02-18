@@ -14,8 +14,12 @@ final class AuthViewController: UIViewController {
         switch segue.identifier {
         case "webViewSegue":
             guard let webViewVC = segue.destination as? WebViewViewController else { return }
-            webViewVC.delegate = self
             webViewVC.modalPresentationStyle = .fullScreen
+
+            let webViewPresenter = WebViewPresenter()
+            webViewVC.presenter = webViewPresenter
+            webViewPresenter.view = webViewVC
+            webViewVC.delegate = self
         default:
             super.prepare(for: segue, sender: sender)
         }
