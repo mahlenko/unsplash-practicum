@@ -12,7 +12,7 @@ import XCTest
 final class WebViewTests: XCTestCase {
     func testViewControllerCallsViewDidLoad() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "WebViewViewController") as! WebViewViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier: "WebViewVC") as! WebViewViewController
         let presenter = WebViewPresenterSpy()
         viewController.presenter = presenter
         presenter.view = viewController

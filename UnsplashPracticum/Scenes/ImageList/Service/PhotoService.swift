@@ -5,7 +5,7 @@
 
 import Foundation
 
-class PhotoService {
+final class PhotoService {
     static let shared = PhotoService()
     private let network = NetworkService.shared
 

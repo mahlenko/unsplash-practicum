@@ -6,7 +6,7 @@
 import UnsplashPracticum
 import Foundation
 
-class WebViewViewControllerSpy: WebViewViewControllerProtocol {
+final class WebViewViewControllerSpy: WebViewViewControllerProtocol {
     var loadRequestCalled = false
     var presenter: WebViewPresenterProtocol?
 

@@ -5,7 +5,7 @@
 
 import Foundation
 
-class LikeRequest {
+final class LikeRequest {
     private let network = NetworkService.shared
 
     func sendChangeLike(id: String, currentStatus: Bool, completion: @escaping (Result<Bool, Error>) -> Void) {

@@ -5,7 +5,7 @@
 
 import Foundation
 
-class AuthHelper: AuthHelperProtocol {
+final class AuthHelper: AuthHelperProtocol {
     let configuration: AuthConfiguration
 
     init(configuration: AuthConfiguration = .standard) {

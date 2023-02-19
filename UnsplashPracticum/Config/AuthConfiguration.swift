@@ -5,13 +5,11 @@
 
 import Foundation
 
-// swiftlint:disable identifier_name
-let AccessKey = "nOLcOHUH7Ts4Cmd04SfIikzffu3i7g9OqAiReZJSAoA"
-let SecretKey = "XM2UQisS3ZUPEJQLxAgwKtXpxevIrqVonKadTLcZKj8"
-let RedirectURI = "urn:ietf:wg:oauth:2.0:oob"
-let AccessScope = "public+read_user+write_likes"
-let AuthURLString = "https://unsplash.com/oauth"
-// swiftlint:enable identifier_name
+let unsplashAccessKey = "nOLcOHUH7Ts4Cmd04SfIikzffu3i7g9OqAiReZJSAoA"
+let unsplashSecretKey = "XM2UQisS3ZUPEJQLxAgwKtXpxevIrqVonKadTLcZKj8"
+let unsplashRedirectUri = "urn:ietf:wg:oauth:2.0:oob"
+let unsplashScope = "public+read_user+write_likes"
+let unsplashAuthUrl = "https://unsplash.com/oauth"
 
 struct AuthConfiguration {
     let accessKey: String
@@ -22,11 +20,11 @@ struct AuthConfiguration {
 
     static var standard: AuthConfiguration {
         AuthConfiguration(
-            accessKey: AccessKey,
-            secretKey: SecretKey,
-            redirectURI: RedirectURI,
-            accessScope: AccessScope,
-            authURLString: AuthURLString)
+            accessKey: unsplashAccessKey,
+            secretKey: unsplashSecretKey,
+            redirectURI: unsplashRedirectUri,
+            accessScope: unsplashScope,
+            authURLString: unsplashAuthUrl)
     }
 
     init(
