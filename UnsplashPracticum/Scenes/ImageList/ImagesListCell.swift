@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
     @IBOutlet weak var imageCell: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateRowView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
+
+    @IBAction func tapLikeButton(_ sender: Any) {
+        delegate?.didTapLike(self)
+    }
+
+    weak var delegate: ImagesListCellDelegate?
 
     // MARK: - IBOutlets
     static let reuseIdentifier = "ImageListCell"
@@ -23,6 +30,7 @@ final class ImagesListCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        imageCell.kf.cancelDownloadTask()
     }
 
     private func configuration() {

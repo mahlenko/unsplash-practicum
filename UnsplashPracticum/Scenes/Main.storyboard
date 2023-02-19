@@ -28,6 +28,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKa-ZE-RDa">
                                 <rect key="frame" x="16" y="722" width="382" height="50"/>
                                 <color key="backgroundColor" name="White"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Authenticate"/>
                                 <color key="tintColor" name="Black"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Войти" buttonSize="large">
@@ -62,7 +63,7 @@
         <!--Web View View Controller-->
         <scene sceneID="azT-zS-7wd">
             <objects>
-                <viewController id="vRg-g1-tle" customClass="WebViewViewController" customModule="UnsplashPracticum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewVC" id="vRg-g1-tle" customClass="WebViewViewController" customModule="UnsplashPracticum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TRk-IZ-Ueb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,11 +156,15 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiD-LI-Abn" userLabel="Like">
                                                     <rect key="frame" x="352" y="0.0" width="42" height="42"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="likeButton"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="42" id="GNJ-Iv-Gn2"/>
                                                         <constraint firstAttribute="height" constant="42" id="Xlx-HA-bxz"/>
                                                     </constraints>
                                                     <buttonConfiguration key="configuration" style="plain" image="heart-default"/>
+                                                    <connections>
+                                                        <action selector="tapLikeButton:" destination="syW-7K-FrM" eventType="touchUpInside" id="fsa-Bw-plR"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFc-w4-FyR" userLabel="DateRow">
                                                     <rect key="frame" x="20" y="194" width="374" height="33"/>
@@ -254,6 +259,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXB-8i-6SY" userLabel="backward">
                                 <rect key="frame" x="8" y="56" width="48" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="backward"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Shv-z1-edD"/>
                                     <constraint firstAttribute="height" constant="48" id="fOB-4k-1tM"/>

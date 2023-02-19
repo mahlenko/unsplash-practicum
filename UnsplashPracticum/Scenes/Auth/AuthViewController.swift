@@ -5,6 +5,10 @@
 
 import UIKit
 
+protocol AuthViewControllerDelegate: AnyObject {
+    func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String)
+}
+
 final class AuthViewController: UIViewController {
     weak var delegate: AuthViewControllerDelegate?
 
@@ -14,8 +18,13 @@ final class AuthViewController: UIViewController {
         switch segue.identifier {
         case "webViewSegue":
             guard let webViewVC = segue.destination as? WebViewViewController else { return }
-            webViewVC.delegate = self
             webViewVC.modalPresentationStyle = .fullScreen
+
+            let authHelper = AuthHelper()
+            let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+            webViewVC.presenter = webViewPresenter
+            webViewPresenter.view = webViewVC
+            webViewVC.delegate = self
         default:
             super.prepare(for: segue, sender: sender)
         }

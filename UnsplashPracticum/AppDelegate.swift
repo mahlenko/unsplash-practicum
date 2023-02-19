@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import ProgressHUD
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        true
+        ProgressHUD.animationType = .circleStrokeSpin
+        ProgressHUD.colorAnimation = .blackBrand
+        return true
     }
 
     // MARK: UISceneSession Lifecycle

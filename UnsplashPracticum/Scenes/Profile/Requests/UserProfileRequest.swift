@@ -5,8 +5,9 @@
 
 import Foundation
 
-class UserProfileRequest: NetworkService {
-    static let shared = UserProfileRequest(urlSession: URLSession.shared)
+class UserProfileRequest {
+    static let shared = UserProfileRequest()
+    private let network = NetworkService.shared
 
     private (set) var profile: UserProfile?
 
@@ -14,7 +15,7 @@ class UserProfileRequest: NetworkService {
 
     func fetchUserProfile(username: String, token: String, completion: @escaping (Result<UserProfileModel, Error>) -> Void) {
         let headers = [(key: "Authorization", value: "Bearer \(token)")]
-        fetch(method: .GET, urlComponent: fetchUrlComponent(username: username), headers: headers) { result in
+        network.fetch(method: .GET, urlComponent: fetchUrlComponent(username: username), headers: headers) { result in
             switch result {
             case .success(let data):
                 do {
@@ -42,7 +43,7 @@ class UserProfileRequest: NetworkService {
 
     private func fetchUrlComponent(username: String) -> URLComponents {
         guard
-            let url = URL(string: "\(Constant.unsplashBaseURL.rawValue)/users/\(username)"),
+            let url = URL(string: network.configuration.baseUrl + "/users/\(username)"),
             let urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: false)
         else {
             fatalError("Oops, something went wrong. Failed to create a link to get a user profile..")

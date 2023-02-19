@@ -8,7 +8,7 @@ import UIKit
 import Drops
 
 enum ErrorToast {
-    static func show(message: String, title: String = "Что-то пошло не так", action: Drop.Action?) {
+    static func show(message: String, title: String = "Что-то пошло не так", action: Drop.Action? = nil) {
         Drops.show(
             Drop(
                 title: title,

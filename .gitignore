@@ -11,3 +11,5 @@ Pods/
 build/
 xcuserdata/
 xcshareddata/
+*.xcworkspace
+UnsplashPracticumTests/PhotoRequestTest.swift

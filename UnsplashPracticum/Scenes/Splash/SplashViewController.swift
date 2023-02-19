@@ -10,9 +10,7 @@ import Drops
 class SplashViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
-    private let session = URLSession.shared
     private var profileRequest = ProfileRequest.shared
-
     private var tokenStorage: OAuth2Token = OAuth2TokenStorage()
     private let authScreenSegueIdentifier = "ShowAuthenticationScreen"
 
@@ -98,7 +96,7 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
 
     private func getTokenAuthorize(code: String ) {
-        let service = OAuth2Service(urlSession: URLSession.shared)
+        let service = OAuth2Service()
 
         service.fetchAuthToken(code: code) { [weak self] result in
             switch result {
