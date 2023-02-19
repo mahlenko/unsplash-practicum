@@ -54,14 +54,16 @@ final class ProfileViewController: UIViewController {
     @IBAction func tapLogoutButton(_ sender: Any) {
         // нужно использовать делегат и доступ к OAuth2Token.
         // На скорую руку для тестов пока так, 10 спринт не требует разлогиниться
-
-        let message = "Действительно хотите выйти?"
-        let alertView = UIAlertController(title: "Пока, пока!", message: message, preferredStyle: .alert)
+        let alertView = UIAlertController(
+            title: "Пока, пока!",
+            message: "Действительно хотите выйти?",
+            preferredStyle: .alert)
         let buttonNo = UIAlertAction(title: "Нет", style: .cancel)
         let buttonYes = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self else { return }
             self.userLogout()
         }
+        buttonYes.accessibilityIdentifier = "Yes"
 
         alertView.addAction(buttonNo)
         alertView.addAction(buttonYes)
@@ -153,6 +155,7 @@ final class ProfileViewController: UIViewController {
 
     func configureUsernameLabel() {
         usernameLabel.text = "Имя Фамилия"
+        usernameLabel.accessibilityIdentifier = "username"
         usernameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         usernameLabel.textColor = UIColor.whiteBrand
 
@@ -162,6 +165,7 @@ final class ProfileViewController: UIViewController {
 
     func configureNicknameLabel() {
         nicknameLabel.text = "@nickname"
+        nicknameLabel.accessibilityIdentifier = "nickname"
         nicknameLabel.font = UIFont.systemFont(ofSize: 13)
         nicknameLabel.textColor = UIColor.grayBrand
 
@@ -180,6 +184,7 @@ final class ProfileViewController: UIViewController {
 
     func configureLogoutButton() {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.accessibilityIdentifier = "logoutButton"
         logoutButton.setImage(UIImage(named: "logout-active"), for: .normal)
         view.addSubview(logoutButton)
 
